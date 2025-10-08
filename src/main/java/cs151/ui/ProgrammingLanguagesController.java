@@ -1,14 +1,15 @@
 package cs151.ui;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class ProgrammingLanguagesController {
-    // public TextField idField;
-    public TextField nameField;
+    @FXML
+    private TextField nameField;
 
     public void handleSave(ActionEvent event) {
         // TODO Print to console for now -> Later save to programming_languages.csv
