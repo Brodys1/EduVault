@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cs151.ui.HomeController"
+            prefWidth="600" prefHeight="400">
+    <children>
+        <Button text="Define Programming Languages"
+                layoutX="200" layoutY="180"
+                onAction="#handleDefineLanguages"/>
+    </children>
+</AnchorPane>
