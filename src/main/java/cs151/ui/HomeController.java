@@ -1,5 +1,6 @@
 package cs151.ui;
 
+import cs151.application.LangTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,5 +12,20 @@ public class HomeController {
         Scene scene = new Scene(
                 FXMLLoader.load(getClass().getResource("/cs151/application/programming_languages.fxml")));
         stage.setScene(scene);
+    }
+
+    private static Stage langTableStage;
+
+    public void handleLangTable(ActionEvent event) throws Exception {
+        
+        if (langTableStage != null && langTableStage.isShowing()) {
+            langTableStage.toFront();
+            return;
+        }
+
+        LangTable langTable = new LangTable();
+        langTableStage = new Stage();
+        langTable.start(langTableStage);
+
     }
 }

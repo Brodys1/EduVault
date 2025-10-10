@@ -1,4 +1,4 @@
-package cs151.ui;
+package cs151.application;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -38,7 +38,7 @@ public class LangTable extends Application {
     public void start(Stage stage) {
         // make an empty table with one column, "Programming Language(s)"
         TableView<Language> table = new TableView<>();
-        TableColumn<Language, String> col = new TableColumn<>("Programming Language(s)");
+        TableColumn<Language, String> col = new TableColumn<>("Name");
         
         // col will use getName() to get the value
         col.setCellValueFactory(new PropertyValueFactory<>("name"));
