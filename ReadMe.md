@@ -9,6 +9,7 @@
     - 0.3 | Implemented storage for programming languages (programming_languages.csv)
 2. Chloe Pham
     - 0.2 | Implemented programming_languages.fxml
+    - 0.3 | Implemented LangTable.java
 3. Xuan Phuong Nguyen
     - 0.2 | Implemented HomeController.java
 4. Tavishi Bansal
