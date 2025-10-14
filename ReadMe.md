@@ -10,6 +10,7 @@
 2. Chloe Pham
     - 0.2 | Implemented programming_languages.fxml
     - 0.3 | Implemented LangTable.java
+    - 0.4 | Implemented to & back button for StudentController.java & student.fxml
 3. Xuan Phuong Nguyen
     - 0.2 | Implemented HomeController.java
 4. Tavishi Bansal

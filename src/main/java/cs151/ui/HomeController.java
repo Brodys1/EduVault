@@ -28,4 +28,11 @@ public class HomeController {
         langTable.start(langTableStage);
 
     }
+
+    public void handleDefineStudentProfile(ActionEvent event) throws Exception {
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(
+                FXMLLoader.load(getClass().getResource("/cs151/application/student.fxml")));
+        stage.setScene(scene);
+    }
 }

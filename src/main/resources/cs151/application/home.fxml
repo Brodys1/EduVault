@@ -13,5 +13,8 @@
         <Button text="View Programming Languages"
                 layoutX="205" layoutY="250"
                 onAction="#handleLangTable"/>
+        <Button text="Define Student Profile"
+                layoutX="225" layoutY="110"
+                onAction="#handleDefineStudentProfile"/> 
     </children>
 </AnchorPane>
