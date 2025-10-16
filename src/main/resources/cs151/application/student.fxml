@@ -68,10 +68,6 @@
                         <HBox spacing="10">
                             <Label text="Programming Languages:" prefWidth="150"/>
                             <ListView fx:id="programmingLanguagesList" prefWidth="300" prefHeight="100"/>
-                            <VBox spacing="5">
-                                <Button text="Add Language" onAction="#addProgrammingLanguage"/>
-                                <Button text="Remove Language" onAction="#removeProgrammingLanguage"/>
-                            </VBox>
                             <Label fx:id="programmingLanguagesError" text="" style="-fx-text-fill: red;"/>
                         </HBox>
                         
@@ -79,10 +75,6 @@
                         <HBox spacing="10">
                             <Label text="Databases Known:" prefWidth="150"/>
                             <ListView fx:id="databasesList" prefWidth="300" prefHeight="100"/>
-                            <VBox spacing="5">
-                                <Button text="Add Database" onAction="#addDatabase"/>
-                                <Button text="Remove Database" onAction="#removeDatabase"/>
-                            </VBox>
                             <Label fx:id="databasesError" text="" style="-fx-text-fill: red;"/>
                         </HBox>
                         
