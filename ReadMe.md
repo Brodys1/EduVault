@@ -16,6 +16,8 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 - 0.2 | Implemented HomeController.java
+- 0.4 | Implemented AppData.java and LanguageRepository.java
+- 0.4 | Made data visible in tabular form using JavaFX TableView (LangTable.java & programming_languages.fxml)
 
 Tavishi Bansal
 - 0.2 | Implemented home.fxml
