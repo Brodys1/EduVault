@@ -19,6 +19,7 @@ Xuan Phuong Nguyen
 
 Tavishi Bansal
 - 0.2 | Implemented home.fxml
+- 0.4 | Fixed UI to allow going back to home page 
 
 ## Any other instruction that users need to know:
 
