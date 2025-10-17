@@ -11,7 +11,7 @@
     <Label text="Saved Student Profiles"
            style="-fx-font-size:18; -fx-font-weight:bold;" />
 
-    <TableView fx:id="studentsTable" prefHeight="500">
+    <TableView fx:id="studentsTable" prefHeight="400" prefWidth="600">
         <columns>
             <TableColumn fx:id="nameCol" text="Full Name" prefWidth="150" />
             <TableColumn fx:id="statusCol" text="Academic Status" prefWidth="120" />
@@ -27,6 +27,6 @@
 
     <HBox spacing="10">
         <Button text="Delete Selected" onAction="#handleDelete"/>
-        <Button text="Back to Home" onAction="#handleBack"/>
+        <Button text="Back" onAction="#handleBack"/>
     </HBox>
 </VBox>
