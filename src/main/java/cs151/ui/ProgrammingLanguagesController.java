@@ -1,65 +1,119 @@
 package cs151.ui;
 
-import cs151.application.LangTable.Language;
-import cs151.application.LanguageRepository;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import java.util.Comparator;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 public class ProgrammingLanguagesController {
-
-    @FXML private TableView<Language> table;
-    @FXML private TableColumn<Language, String> nameCol;
-    @FXML private TextField newNameField;
-
-    private ObservableList<Language> items;
+    @FXML
+    private TextField nameField;
 
     @FXML
-    public void initialize() {
-        // Load data from your LanguageRepository
-        items = LanguageRepository.loadAll();
+    private Label messageLabel;
 
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        nameCol.setOnEditCommit(event -> {
-            int index = event.getTablePosition().getRow();
-            Language lang = items.get(index);
-            String newName = event.getNewValue().trim();
-            if (!newName.isEmpty()) {
-                items.set(index, new Language(newName));
-                onSave();
-            }
-            table.refresh();
-        });
+    private static final String CSV_FILE = "programming_languages.csv";
 
-        table.setEditable(true);
-        table.setItems(items);
-        items.sort(Comparator.comparing(l -> l.getName().toLowerCase()));
-    }
+    public void handleSave(ActionEvent event) {
+        String languageName = nameField.getText().trim();
+        System.out.println("Save button clicked for: '" + languageName + "'");
 
-    @FXML
-    private void onAdd() {
-        String newName = newNameField.getText().trim();
-        if (!newName.isEmpty()) {
-            items.add(new Language(newName));
-            newNameField.clear();
-            onSave();
+        // Check if input is empty
+        if (languageName.isEmpty()) {
+            System.out.println("Empty input detected");
+            showMessage("Blank entry prohibited", true);
+            return;
+        }
+
+        // Check for duplicates
+        if (isDuplicate(languageName)) {
+            System.out.println("Duplicate detected, showing message");
+            showMessage("Language already exists!", true);
+            return;
+        }
+
+        // Save to CSV
+        try {
+            System.out.println("Saving to CSV: " + languageName);
+            saveToCSV(languageName);
+            showMessage("Saved successfully!", false);
+            nameField.clear();
+        } catch (IOException e) {
+            System.out.println("Error saving: " + e.getMessage());
+            showMessage("Error: " + e.getMessage(), true);
         }
     }
 
-    @FXML
-    private void onDelete() {
-        var selected = table.getSelectionModel().getSelectedItems();
-        items.removeAll(selected);
-        onSave();
+    private boolean isDuplicate(String languageName) {
+        try {
+            if (!Files.exists(Paths.get(CSV_FILE))) {
+                System.out.println("CSV file does not exist, no duplicates");
+                return false;
+            }
+
+            List<String> lines = Files.readAllLines(Paths.get(CSV_FILE));
+            System.out.println("CSV file has " + lines.size() + " lines");
+            System.out.println("Checking for duplicate: " + languageName);
+
+            // Skip the header row (first line) when checking for duplicates
+            for (int i = 1; i < lines.size(); i++) {
+                String line = lines.get(i).trim();
+                System.out.println("Comparing with line " + i + ": '" + line + "'");
+                if (line.equalsIgnoreCase(languageName)) {
+                    System.out.println("Found duplicate!");
+                    return true;
+                }
+            }
+            System.out.println("No duplicate found");
+        } catch (IOException e) {
+            System.err.println("Error reading CSV file: " + e.getMessage());
+        }
+        return false;
     }
 
-    @FXML
-    private void onSave() {
-        LanguageRepository.saveAll(items);
+    private void saveToCSV(String languageName) throws IOException {
+        // Create file if it doesn't exist and add header
+        if (!Files.exists(Paths.get(CSV_FILE))) {
+            Files.write(Paths.get(CSV_FILE), "Programming Language\n".getBytes());
+        }
+
+        // Append the new language
+        Files.write(Paths.get(CSV_FILE), (languageName + "\n").getBytes(), StandardOpenOption.APPEND);
+    }
+
+    private void showMessage(String message, boolean isError) {
+        System.out.println("Showing message: '" + message + "' (error: " + isError + ")");
+        messageLabel.setText(message);
+        if (isError) {
+            messageLabel.setStyle("-fx-text-fill: red;");
+        } else {
+            messageLabel.setStyle("-fx-text-fill: green;");
+        }
+
+        // Clear message after 3 seconds using a separate thread
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                javafx.application.Platform.runLater(() -> {
+                    messageLabel.setText("");
+                });
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }).start();
+    }
+
+    public void handleBack(ActionEvent event) throws Exception {
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));
+        stage.setScene(scene);
     }
 }
