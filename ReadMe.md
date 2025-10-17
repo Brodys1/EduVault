@@ -19,7 +19,10 @@ Xuan Phuong Nguyen
 
 Tavishi Bansal
 - 0.2 | Implemented home.fxml
-- 0.4 | Fixed UI to allow going back to home page 
+- 0.4 | Implemented StudentProfilesController.java and StudentProfile.java
+- 0.4 | Implemented StudentRepository.java
+- 0.4 | Implemented student_profiles.fxml
+- 0.4 | Implemented storage for student profiles (students.csv)
 
 ## Any other instruction that users need to know:
 
