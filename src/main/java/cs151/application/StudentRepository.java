@@ -44,7 +44,13 @@ public class StudentRepository {
             boolean isHeader = true;
             while ((line = reader.readLine()) != null) {
                 if (isHeader) { isHeader = false; continue; }
-                String[] p = line.split(",", -1);
+                String[] p = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                //String[] p = line.split(",", -1);
+
+                for (int i = 0; i < p.length; i++) {
+                    p[i] = p[i].replaceAll("^\"|\"$", "").trim();
+                }
+
                 if (p.length >= 9) {
                     students.add(new StudentProfile(
                             p[0].trim(), // full name
@@ -77,7 +83,7 @@ public class StudentRepository {
             writer.println("FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags");
 
             for (StudentProfile s : students) {
-                writer.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s%n",
+                writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
                         s.getFullName(),
                         s.getAcademicStatus(),
                         s.getEmploymentStatus(),
