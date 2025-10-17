@@ -178,6 +178,52 @@ public class StudentController implements Initializable {
     }
 
     @FXML
+    private void addProgrammingLanguage() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Add Programming Language");
+        dialog.setHeaderText("Enter a programming language:");
+        dialog.setContentText("Language:");
+
+        dialog.showAndWait().ifPresent(language -> {
+            if (!language.trim().isEmpty() && !availableLanguages.contains(language.trim())) {
+                availableLanguages.add(language.trim());
+            }
+        });
+    }
+
+    @FXML
+    private void removeProgrammingLanguage() {
+        String selected = programmingLanguagesList.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            availableLanguages.remove(selected);
+            selectedLanguages.remove(selected);
+        }
+    }
+
+    @FXML
+    private void addDatabase() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Add Database");
+        dialog.setHeaderText("Enter a database:");
+        dialog.setContentText("Database:");
+
+        dialog.showAndWait().ifPresent(database -> {
+            if (!database.trim().isEmpty() && !availableDatabases.contains(database.trim())) {
+                availableDatabases.add(database.trim());
+            }
+        });
+    }
+
+    @FXML
+    private void removeDatabase() {
+        String selected = databasesList.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            availableDatabases.remove(selected);
+            selectedDatabases.remove(selected);
+        }
+    }
+
+    @FXML
     private void addComment() {
         String comment = commentsArea.getText().trim();
         if (!comment.isEmpty()) {
@@ -194,7 +240,9 @@ public class StudentController implements Initializable {
             return;
         }
 
+
         // TODO: Teammates will implement this
+
 
         statusLabel.setText("Form validation passed!");
         statusLabel.setStyle("-fx-text-fill: blue;");
