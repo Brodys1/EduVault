@@ -29,7 +29,6 @@
             <Button text="Add" onAction="#onAdd"/>
             <Button text="Delete Selected" onAction="#onDelete"/>
             <Button text="Save" onAction="#onSave"/>
-            <Button text="Back" onAction="#handleBack"/>
         </HBox>
 
     </children>
