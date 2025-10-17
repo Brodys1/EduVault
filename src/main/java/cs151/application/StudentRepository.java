@@ -24,6 +24,7 @@ public class StudentRepository {
 
     public static void add(StudentProfile student) {
         students.add(student);
+        sortStudents();
         saveToFile();
     }
 
@@ -59,9 +60,16 @@ public class StudentRepository {
                 }
             }
             System.out.println("Loaded " + students.size() + " students from file.");
+            sortStudents();
         } catch (IOException e) {
             System.err.println("Error reading students file: " + e.getMessage());
         }
+    }
+
+    private static void sortStudents() {
+        FXCollections.sort(students, (a, b) ->
+                a.getFullName().compareToIgnoreCase(b.getFullName())
+        );
     }
 
     private static void saveToFile() {
