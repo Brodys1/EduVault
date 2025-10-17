@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <VBox xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="cs151.ui.StudentProfilesController"
-      spacing="10" prefWidth="600" prefHeight="400"
-      style="-fx-padding:12;">
-    <children>
+      spacing="10" style="-fx-padding: 20;">
 
-        <Label text="All Student Profiles (A to Z)"
-               style="-fx-font-size:16; -fx-font-weight:bold;"/>
+    <Label text="Saved Student Profiles"
+           style="-fx-font-size:18; -fx-font-weight:bold;" />
 
-        <TableView fx:id="table" prefHeight="320">
-            <columns>
-                <TableColumn fx:id="nameCol" text="Full Name" prefWidth="150"/>
-                <TableColumn fx:id="statusCol" text="Academic Status" prefWidth="120"/>
-                <TableColumn fx:id="roleCol" text="Preferred Role" prefWidth="120"/>
-                <TableColumn fx:id="languagesCol" text="Languages" prefWidth="150"/>
-            </columns>
-            <placeholder>
-                <Label text="No student profiles found."/>
-            </placeholder>
-        </TableView>
+    <TableView fx:id="studentsTable" prefHeight="500">
+        <columns>
+            <TableColumn fx:id="nameCol" text="Full Name" prefWidth="150" />
+            <TableColumn fx:id="statusCol" text="Academic Status" prefWidth="120" />
+            <TableColumn fx:id="employmentCol" text="Employment" prefWidth="100" />
+            <TableColumn fx:id="jobDetailsCol" text="Job Details" prefWidth="150" />
+            <TableColumn fx:id="langCol" text="Languages" prefWidth="180" />
+            <TableColumn fx:id="dbCol" text="Databases" prefWidth="180" />
+            <TableColumn fx:id="roleCol" text="Preferred Role" prefWidth="120" />
+            <TableColumn fx:id="commentsCol" text="Comments" prefWidth="180" />
+            <TableColumn fx:id="flagsCol" text="Flags" prefWidth="100" />
+        </columns>
+    </TableView>
 
-        <HBox alignment="CENTER_RIGHT">
-            <Button text="Back to Home" onAction="#handleBack"/>
-        </HBox>
-
-    </children>
+    <HBox spacing="10">
+        <Button text="Delete Selected" onAction="#handleDelete"/>
+        <Button text="Back to Home" onAction="#handleBack"/>
+    </HBox>
 </VBox>

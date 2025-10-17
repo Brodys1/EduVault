@@ -240,20 +240,25 @@ public class StudentController implements Initializable {
             return;
         }
 
-        // Create a new student profile
         String fullName = fullNameField.getText().trim();
         String academicStatus = academicStatusCombo.getSelectionModel().getSelectedItem();
-        String preferredRole = preferredRoleCombo.getSelectionModel().getSelectedItem();
+        String employmentStatus = employedRadio.isSelected() ? "Employed" : "Not Employed";
+        String jobDetails = jobDetailsField.getText().trim();
         String languages = String.join(", ", selectedLanguages);
+        String databases = String.join(", ", selectedDatabases);
+        String preferredRole = preferredRoleCombo.getSelectionModel().getSelectedItem();
+        String comments = commentsArea.getText().trim();
+        String flags = whitelistCheck.isSelected() ? "Whitelist"
+                : blacklistCheck.isSelected() ? "Blacklist"
+                : "None";
 
-        // Save to shared repository
         cs151.application.StudentRepository.add(
-                new cs151.ui.StudentProfile(fullName, academicStatus, preferredRole, languages)
+                new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,
+                        languages, databases, preferredRole, comments, flags)
         );
 
         statusLabel.setText("Profile saved successfully!");
         statusLabel.setStyle("-fx-text-fill: blue;");
-
         clearForm();
     }
 
