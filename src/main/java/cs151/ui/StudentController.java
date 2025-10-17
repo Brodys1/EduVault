@@ -194,9 +194,18 @@ public class StudentController implements Initializable {
             return;
         }
 
-        // TODO: Teammates will implement this
+        // Create a new student profile
+        String fullName = fullNameField.getText().trim();
+        String academicStatus = academicStatusCombo.getSelectionModel().getSelectedItem();
+        String preferredRole = preferredRoleCombo.getSelectionModel().getSelectedItem();
+        String languages = String.join(", ", selectedLanguages);
 
-        statusLabel.setText("Form validation passed!");
+        // Save to shared repository
+        cs151.application.StudentRepository.add(
+                new cs151.ui.StudentProfile(fullName, academicStatus, preferredRole, languages)
+        );
+
+        statusLabel.setText("Profile saved successfully!");
         statusLabel.setStyle("-fx-text-fill: blue;");
 
         clearForm();

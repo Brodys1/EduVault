@@ -15,6 +15,9 @@
                 onAction="#handleLangTable"/>
         <Button text="Define Student Profile"
                 layoutX="225" layoutY="110"
-                onAction="#handleDefineStudentProfile"/> 
+                onAction="#handleDefineStudentProfile"/>
+        <Button text="View All Student Profiles"
+                layoutX="210" layoutY="320"
+                onAction="#handleViewAllStudents"/>
     </children>
 </AnchorPane>

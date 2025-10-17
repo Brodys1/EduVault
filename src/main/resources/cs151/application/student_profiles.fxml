@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="cs151.ui.StudentProfilesController"
+      spacing="10" prefWidth="600" prefHeight="400"
+      style="-fx-padding:12;">
+    <children>
+
+        <Label text="All Student Profiles (A to Z)"
+               style="-fx-font-size:16; -fx-font-weight:bold;"/>
+
+        <TableView fx:id="table" prefHeight="320">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Full Name" prefWidth="150"/>
+                <TableColumn fx:id="statusCol" text="Academic Status" prefWidth="120"/>
+                <TableColumn fx:id="roleCol" text="Preferred Role" prefWidth="120"/>
+                <TableColumn fx:id="languagesCol" text="Languages" prefWidth="150"/>
+            </columns>
+            <placeholder>
+                <Label text="No student profiles found."/>
+            </placeholder>
+        </TableView>
+
+        <HBox alignment="CENTER_RIGHT">
+            <Button text="Back to Home" onAction="#handleBack"/>
+        </HBox>
+
+    </children>
+</VBox>
