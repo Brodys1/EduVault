@@ -1,5 +1,10 @@
 package cs151.ui;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 import cs151.application.LangTable.Language;
 import cs151.application.LanguageRepository;
 import javafx.collections.FXCollections;
@@ -61,5 +66,17 @@ public class ProgrammingLanguagesController {
     @FXML
     private void onSave() {
         LanguageRepository.saveAll(items);
+    }
+
+    @FXML
+    private void handleBack(ActionEvent event) throws Exception {
+        // get the current window
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // load home.fxml and set it to this stage
+        Scene scene = new Scene(
+                FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml"))
+        );
+        stage.setScene(scene);
     }
 }
