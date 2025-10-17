@@ -40,9 +40,6 @@ public class HomeController {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/student_profiles.fxml")));
         stage.setTitle("All Student Profiles");
         stage.setScene(scene);
-
-        stage.setWidth(600);
-        stage.setHeight(400);
         stage.setResizable(true);
     }
 
