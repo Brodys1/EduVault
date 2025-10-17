@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="cs151.ui.HomeController"
-            prefWidth="600" prefHeight="400">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cs151.ui.HomeController"
+      alignment="CENTER"
+      spacing="10"
+      prefWidth="600" prefHeight="400">
     <children>
         <Button text="Define Programming Languages"
-                layoutX="200" layoutY="180"
-                onAction="#handleDefineLanguages"/>
+                onAction="#handleDefineLanguages"
+                prefWidth="200" maxWidth="250"/>
         <Button text="View Programming Languages"
-                layoutX="205" layoutY="250"
-                onAction="#handleLangTable"/>
+                onAction="#handleLangTable"
+                prefWidth="200" maxWidth="250"/>
         <Button text="Define Student Profile"
-                layoutX="225" layoutY="110"
-                onAction="#handleDefineStudentProfile"/>
+                onAction="#handleDefineStudentProfile"
+                prefWidth="200" maxWidth="250"/>
         <Button text="View All Student Profiles"
-                layoutX="210" layoutY="320"
-                onAction="#handleViewAllStudents"/>
+                onAction="#handleViewAllStudents"
+                prefWidth="200" maxWidth="250"/>
     </children>
-</AnchorPane>
+</VBox>
