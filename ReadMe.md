@@ -8,6 +8,7 @@ Brody Smith
 - 0.2 | Implemented ProgrammingLanguagesController.java
 - 0.3 | Implemented storage for programming languages (programming_languages.csv)
 - 0.4 | Implemented StudentController.java & student.fxml
+- 0.4 | Fixed bugs and added duplicate check while saving student information
 
 Chloe Pham
 - 0.2 | Implemented programming_languages.fxml
