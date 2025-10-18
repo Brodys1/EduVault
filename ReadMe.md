@@ -1,6 +1,6 @@
 # Name of application: *EduVault*
 
-## Version: 0.4
+## Version: 0.5
 
 ## Who did what:
 
@@ -17,6 +17,7 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 - 0.2 | Implemented HomeController.java
+- 0.4 | Implemented all stored Students Profiles info in a tabular format, sorted alphabetically ascending.
 
 Tavishi Bansal
 - 0.2 | Implemented home.fxml
