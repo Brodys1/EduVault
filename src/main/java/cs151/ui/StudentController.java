@@ -180,11 +180,11 @@ public class StudentController implements Initializable {
     @FXML
     private void addComment() {
         String comment = commentsArea.getText().trim();
-        if (!comment.isEmpty()) 
+        if (!comment.isEmpty())
             // TODO Change this to make multiple entries instead
             commentsArea.setText(comment + "\n\n");
-            commentsArea.positionCaret(commentsArea.getText().length());
-        
+        commentsArea.positionCaret(commentsArea.getText().length());
+
     }
 
     @FXML
@@ -207,13 +207,18 @@ public class StudentController implements Initializable {
                 : blacklistCheck.isSelected() ? "Blacklist"
                         : "None";
 
-        cs151.application.StudentRepository.add(
+        boolean success = cs151.application.StudentRepository.add(
                 new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,
                         languages, databases, preferredRole, comments, flags));
 
-        statusLabel.setText("Profile saved successfully!");
-        statusLabel.setStyle("-fx-text-fill: blue;");
-        clearForm();
+        if (success) {
+            statusLabel.setText("Profile saved successfully!");
+            statusLabel.setStyle("-fx-text-fill: blue;");
+            clearForm();
+        } else {
+            statusLabel.setText("Error: A student with this name already exists!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+        }
     }
 
     @FXML

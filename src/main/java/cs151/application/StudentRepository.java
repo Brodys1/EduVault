@@ -22,10 +22,32 @@ public class StudentRepository {
         return students;
     }
 
-    public static void add(StudentProfile student) {
+    public static boolean add(StudentProfile student) {
+        // check if a student with the same name already exists
+        if (nameExists(student.getFullName())) {
+            return false;
+        }
+
         students.add(student);
         sortStudents();
         saveToFile();
+        return true;
+    }
+
+    /**
+     * Check if a student with the given name already exists in the repository
+     * 
+     * @param fullName the name to check for
+     * @return true if a student with this name already exists, false otherwise
+     */
+    public static boolean nameExists(String fullName) {
+        if (fullName == null || fullName.trim().isEmpty()) {
+            return false;
+        }
+
+        String trimmedName = fullName.trim();
+        return students.stream()
+                .anyMatch(student -> student.getFullName().trim().equalsIgnoreCase(trimmedName));
     }
 
     public static void clear() {
@@ -43,9 +65,11 @@ public class StudentRepository {
             String line;
             boolean isHeader = true;
             while ((line = reader.readLine()) != null) {
-                if (isHeader) { isHeader = false; continue; }
+                if (isHeader) {
+                    isHeader = false;
+                    continue;
+                }
                 String[] p = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                //String[] p = line.split(",", -1);
 
                 for (int i = 0; i < p.length; i++) {
                     p[i] = p[i].replaceAll("^\"|\"$", "").trim();
@@ -73,9 +97,7 @@ public class StudentRepository {
     }
 
     private static void sortStudents() {
-        FXCollections.sort(students, (a, b) ->
-                a.getFullName().compareToIgnoreCase(b.getFullName())
-        );
+        FXCollections.sort(students, (a, b) -> a.getFullName().compareToIgnoreCase(b.getFullName()));
     }
 
     private static void saveToFile() {
