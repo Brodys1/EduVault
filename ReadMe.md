@@ -16,6 +16,8 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 - 0.2 | Implemented HomeController.java
+- 0.4 | Impemented all stored Students Profiles info in a tabular 
+format, sorted alphabetically ascending (A to Z case insensitive).
 
 Tavishi Bansal
 - 0.2 | Implemented home.fxml
