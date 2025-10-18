@@ -178,6 +178,16 @@ public class StudentController implements Initializable {
     }
 
     @FXML
+    private void addComment() {
+        String comment = commentsArea.getText().trim();
+        if (!comment.isEmpty()) 
+            // TODO Change this to make multiple entries instead
+            commentsArea.setText(comment + "\n\n");
+            commentsArea.positionCaret(commentsArea.getText().length());
+        
+    }
+
+    @FXML
     private void saveStudentProfile() {
         clearErrorLabels();
 
