@@ -17,6 +17,9 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 - 0.2 | Implemented HomeController.java
+- 0.4 | Implemented StudentProfilesController.java and StudentProfile.java
+- 0.4 | Implemented StudentRepository.java
+- 0.4 | Implemented student_profiles.fxml
 - 0.4 | Implemented all stored Students Profiles info in a tabular format, sorted alphabetically ascending.
 
 Tavishi Bansal
