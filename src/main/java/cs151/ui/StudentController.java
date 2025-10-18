@@ -178,58 +178,13 @@ public class StudentController implements Initializable {
     }
 
     @FXML
-    private void addProgrammingLanguage() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Add Programming Language");
-        dialog.setHeaderText("Enter a programming language:");
-        dialog.setContentText("Language:");
-
-        dialog.showAndWait().ifPresent(language -> {
-            if (!language.trim().isEmpty() && !availableLanguages.contains(language.trim())) {
-                availableLanguages.add(language.trim());
-            }
-        });
-    }
-
-    @FXML
-    private void removeProgrammingLanguage() {
-        String selected = programmingLanguagesList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            availableLanguages.remove(selected);
-            selectedLanguages.remove(selected);
-        }
-    }
-
-    @FXML
-    private void addDatabase() {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Add Database");
-        dialog.setHeaderText("Enter a database:");
-        dialog.setContentText("Database:");
-
-        dialog.showAndWait().ifPresent(database -> {
-            if (!database.trim().isEmpty() && !availableDatabases.contains(database.trim())) {
-                availableDatabases.add(database.trim());
-            }
-        });
-    }
-
-    @FXML
-    private void removeDatabase() {
-        String selected = databasesList.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            availableDatabases.remove(selected);
-            selectedDatabases.remove(selected);
-        }
-    }
-
-    @FXML
     private void addComment() {
         String comment = commentsArea.getText().trim();
-        if (!comment.isEmpty()) {
+        if (!comment.isEmpty())
+            // TODO Change this to make multiple entries instead
             commentsArea.setText(comment + "\n\n");
-            commentsArea.positionCaret(commentsArea.getText().length());
-        }
+        commentsArea.positionCaret(commentsArea.getText().length());
+
     }
 
     @FXML
@@ -240,14 +195,30 @@ public class StudentController implements Initializable {
             return;
         }
 
+        String fullName = fullNameField.getText().trim();
+        String academicStatus = academicStatusCombo.getSelectionModel().getSelectedItem();
+        String employmentStatus = employedRadio.isSelected() ? "Employed" : "Not Employed";
+        String jobDetails = jobDetailsField.getText().trim();
+        String languages = String.join(", ", selectedLanguages);
+        String databases = String.join(", ", selectedDatabases);
+        String preferredRole = preferredRoleCombo.getSelectionModel().getSelectedItem();
+        String comments = commentsArea.getText().trim();
+        String flags = whitelistCheck.isSelected() ? "Whitelist"
+                : blacklistCheck.isSelected() ? "Blacklist"
+                        : "None";
 
-        // TODO: Teammates will implement this
+        boolean success = cs151.application.StudentRepository.add(
+                new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,
+                        languages, databases, preferredRole, comments, flags));
 
-
-        statusLabel.setText("Form validation passed!");
-        statusLabel.setStyle("-fx-text-fill: blue;");
-
-        clearForm();
+        if (success) {
+            statusLabel.setText("Profile saved successfully!");
+            statusLabel.setStyle("-fx-text-fill: blue;");
+            clearForm();
+        } else {
+            statusLabel.setText("Error: A student with this name already exists!");
+            statusLabel.setStyle("-fx-text-fill: red;");
+        }
     }
 
     @FXML
