@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class StudentRepository {
 
@@ -20,6 +21,22 @@ public class StudentRepository {
 
     public static ObservableList<StudentProfile> getAll() {
         return students;
+    }
+
+    public static ObservableList<StudentProfile> searchStudents(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return getAll();
+        }
+        String lowerQuery = query.toLowerCase().trim();
+        return students.stream()
+                .filter(student ->
+                        student.getFullName().toLowerCase().contains(lowerQuery) ||
+                        student.getAcademicStatus().toLowerCase().contains(lowerQuery) ||
+                        student.getLanguages().toLowerCase().contains(lowerQuery) ||
+                        student.getDatabases().toLowerCase().contains(lowerQuery) ||
+                        student.getPreferredRole().toLowerCase().contains(lowerQuery)
+                )
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     public static boolean add(StudentProfile student) {

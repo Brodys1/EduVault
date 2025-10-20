@@ -1,4 +1,8 @@
 # Todo for version 0.6
+
+Test
+- Search function
+
 Bug fixes
 - Make the **delete** button in student table view actually delete the student entry
 - Allow comments to have multiple entries
