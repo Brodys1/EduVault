@@ -43,4 +43,9 @@ public class HomeController {
         stage.setResizable(true);
     }
 
+    public void handleSearchStudents(ActionEvent event) throws Exception {
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/search.fxml")));
+        stage.setScene(scene);
+    }
 }
