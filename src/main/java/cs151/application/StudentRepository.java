@@ -22,6 +22,28 @@ public class StudentRepository {
         return students;
     }
 
+    public static ObservableList<StudentProfile> search(String query) {
+        ObservableList<StudentProfile> results = FXCollections.observableArrayList();
+
+        String lowerQuery = query.toLowerCase();
+
+        for (StudentProfile s : students) {
+            if (s.getFullName().toLowerCase().contains(lowerQuery)
+                    || s.getAcademicStatus().toLowerCase().contains(lowerQuery)
+                    || s.getEmploymentStatus().toLowerCase().contains(lowerQuery)
+                    || s.getJobDetails().toLowerCase().contains(lowerQuery)
+                    || s.getLanguages().toLowerCase().contains(lowerQuery)
+                    || s.getDatabases().toLowerCase().contains(lowerQuery)
+                    || s.getPreferredRole().toLowerCase().contains(lowerQuery)
+                    || s.getComments().toLowerCase().contains(lowerQuery)
+                    || s.getFlags().toLowerCase().contains(lowerQuery)) {
+                results.add(s);
+            }
+        }
+
+        return results;
+    }
+
     public static void add(StudentProfile student) {
         students.add(student);
         sortStudents();

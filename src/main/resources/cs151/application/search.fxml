@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cs151.ui.SearchController"
+            prefWidth="800" prefHeight="600">
+    <children>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Label text="Search Students" style="-fx-font-size:24px; -fx-font-weight:bold;"/>
+
+            <HBox spacing="10">
+                <TextField fx:id="searchField" promptText="Enter name, language, or role..." prefWidth="400"/>
+                <Button text="Search" onAction="#handleSearch"/>
+                <Button text="Back" onAction="#handleBack"/>
+            </HBox>
+
+            <TableView fx:id="resultsTable" prefHeight="500">
+                <columns>
+                    <TableColumn text="Full Name" fx:id="colName" prefWidth="150"/>
+                    <TableColumn text="Academic Status" fx:id="colStatus" prefWidth="100"/>
+                    <TableColumn text="Languages" fx:id="colLanguages" prefWidth="150"/>
+                    <TableColumn text="Databases" fx:id="colDatabases" prefWidth="150"/>
+                    <TableColumn text="Preferred Role" fx:id="colRole" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </children>
+</AnchorPane>

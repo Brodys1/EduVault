@@ -23,5 +23,8 @@
         <Button text="View All Student Profiles"
                 onAction="#handleViewAllStudents"
                 prefWidth="200" maxWidth="250"/>
+        <Button text="Search Students"
+                layoutX="225" layoutY="320"
+                onAction="#handleSearchStudents"/>
     </children>
 </VBox>
