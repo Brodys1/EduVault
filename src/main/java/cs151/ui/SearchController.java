@@ -2,42 +2,59 @@ package cs151.ui;
 
 import cs151.application.StudentRepository;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * Search Students Profiles page:
+ * - Loads ALL profiles into the TableView on open (tabular format).
+ * - Filters using StudentRepository.searchStudents(query).
+ * - Reset shows all rows again.
+ * - Back returns to Home.
+ */
 public class SearchController {
 
-    @FXML
-    private TextField searchField;
-    @FXML
-    private TableView<StudentProfile> resultsTable;
-    @FXML
-    private TableColumn<StudentProfile, String> colName;
-    @FXML
-    private TableColumn<StudentProfile, String> colStatus;
-    @FXML
-    private TableColumn<StudentProfile, String> colLanguages;
-    @FXML
-    private TableColumn<StudentProfile, String> colDatabases;
-    @FXML
-    private TableColumn<StudentProfile, String> colRole;
+    // Top controls
+    @FXML private TextField searchField;
+    @FXML private Button searchButton;   // optional if wired in FXML
+    @FXML private Button clearButton;    // optional if wired in FXML
+
+    // Table + columns
+    @FXML private TableView<StudentProfile> resultsTable;
+    @FXML private TableColumn<StudentProfile, String> colName;
+    @FXML private TableColumn<StudentProfile, String> colStatus;
+    @FXML private TableColumn<StudentProfile, String> colLanguages;
+    @FXML private TableColumn<StudentProfile, String> colDatabases;
+    @FXML private TableColumn<StudentProfile, String> colRole;
+    @FXML private TableColumn<StudentProfile, String> colComments; // NEW
+    @FXML private TableColumn<StudentProfile, String> colFlags;    // NEW
 
     @FXML
     public void initialize() {
-        colName.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getFullName()));
-        colStatus.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getAcademicStatus()));
-        colLanguages.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getLanguages()));
-        colDatabases.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDatabases()));
-        colRole.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPreferredRole()));
+        // Column bindings (match getters in StudentProfile)
+        colName.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFullName()));
+        colStatus.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getAcademicStatus()));
+        colLanguages.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLanguages()));
+        colDatabases.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDatabases()));
+        colRole.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getPreferredRole()));
+        colComments.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getComments())); // NEW
+        colFlags.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFlags()));       // NEW
+
+        // Show all rows in the TableView on page load
+        resultsTable.setItems(StudentRepository.getAll());
+
+        // UX: Enter triggers search; wire buttons if present
+        if (searchField != null) searchField.setOnAction(e -> handleSearch());
+        if (searchButton != null) searchButton.setOnAction(e -> handleSearch());
+        if (clearButton != null) clearButton.setOnAction(e -> handleClear());
     }
 
     @FXML
     private void handleSearch() {
-        String query = searchField.getText().trim();
+        String query = searchField.getText() == null ? "" : searchField.getText().trim();
         if (query.isEmpty()) {
             resultsTable.setItems(StudentRepository.getAll());
         } else {
@@ -47,9 +64,20 @@ public class SearchController {
     }
 
     @FXML
-    private void handleBack(ActionEvent event) throws Exception {
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));
-        stage.setScene(scene);
+    private void handleClear() {
+        if (searchField != null) searchField.clear();
+        resultsTable.setItems(StudentRepository.getAll());
+    }
+
+    @FXML
+    private void handleBack() {
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
+            Stage stage = (Stage) resultsTable.getScene().getWindow();
+            stage.setScene(new Scene(fxml.load()));
+        } catch (Exception ex) {
+            new Alert(Alert.AlertType.ERROR, "Could not load Home: " + ex.getMessage(),
+                    ButtonType.OK).showAndWait();
+        }
     }
 }
