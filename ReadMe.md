@@ -21,7 +21,7 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 
-- 0.6 | Makes search (name, academic status, programming language, database skill, or role) result appear in tabular format (search.fxml, SearchController.java and HomeController)
+- 0.6 | Makes search (name, academic status, programming language, database skill, or role) result appear in tabular format (search.fxml, SearchController.java and HomeController.java)
 - 0.5 | Implemented StudentProfilesController.java and StudentProfile.java
 - 0.5 | Implemented StudentRepository.java
 - 0.5 | Implemented student_profiles.fxml
