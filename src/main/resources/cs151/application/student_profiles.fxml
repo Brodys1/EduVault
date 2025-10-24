@@ -26,7 +26,6 @@
     </TableView>
 
     <HBox spacing="10">
-        <Button text="Delete Selected" onAction="#handleDelete"/>
         <Button text="Back" onAction="#handleBack"/>
     </HBox>
 </VBox>
