@@ -1,5 +1,7 @@
 package cs151.ui;
 
+import java.util.ArrayList;
+
 import cs151.application.StudentRepository;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,6 +52,9 @@ public class SearchController {
         if (searchField != null) searchField.setOnAction(e -> handleSearch());
         if (searchButton != null) searchButton.setOnAction(e -> handleSearch());
         if (clearButton != null) clearButton.setOnAction(e -> handleClear());
+
+        // Allows selection of multiple rows
+        resultsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
@@ -80,4 +85,27 @@ public class SearchController {
                     ButtonType.OK).showAndWait();
         }
     }
+
+    @FXML
+private void handleDelete() {
+    // copy selection to a normal list so it won't change while we remove
+    var selected = new ArrayList<>(resultsTable.getSelectionModel().getSelectedItems());
+
+    if (selected.isEmpty()) {
+        new Alert(Alert.AlertType.INFORMATION, "Select one or more students first.", ButtonType.OK).showAndWait();
+        return;
+    }
+
+    boolean confirmed = new Alert(Alert.AlertType.CONFIRMATION,
+            "Delete " + selected.size() + " selected student(s)?",
+            ButtonType.OK, ButtonType.CANCEL)
+        .showAndWait().filter(btn -> btn == ButtonType.OK).isPresent();
+    if (!confirmed) return;
+
+    for (StudentProfile s : selected) {
+        StudentRepository.remove(s);
+    }
+
+    handleSearch();
+}
 }

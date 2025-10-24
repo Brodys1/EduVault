@@ -19,6 +19,7 @@
                 <Button fx:id="clearButton" text="Reset" onAction="#handleClear"/>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button text="Back to Home" onAction="#handleBack"/>
+                <Button text="Delete Selected" onAction="#handleDelete"/>
             </HBox>
         </VBox>
     </top>

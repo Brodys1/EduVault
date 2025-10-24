@@ -138,4 +138,10 @@ public class StudentRepository {
             System.err.println("Error saving students file: " + e.getMessage());
         }
     }
+
+    public static void remove(StudentProfile student) {
+        if (student == null) return;
+        students.remove(student);
+        saveToFile();
+    }
 }

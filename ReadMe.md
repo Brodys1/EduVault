@@ -15,6 +15,7 @@ Brody Smith
 
 Chloe Pham
 
+- 0.6 | Implemented deletion of student function for student search page
 - 0.5 | Implemented to & back button for StudentController.java & student.fxml
 - 0.3 | Implemented LangTable.java
 - 0.2 | Implemented programming_languages.fxml
