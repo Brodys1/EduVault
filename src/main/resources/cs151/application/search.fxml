@@ -25,6 +25,7 @@
                     <TableColumn text="Languages" fx:id="colLanguages" prefWidth="150"/>
                     <TableColumn text="Databases" fx:id="colDatabases" prefWidth="150"/>
                     <TableColumn text="Preferred Role" fx:id="colRole" prefWidth="150"/>
+                    <TableColumn text="Actions" fx:id="colActions" prefWidth="100"/>
                 </columns>
             </TableView>
         </VBox>

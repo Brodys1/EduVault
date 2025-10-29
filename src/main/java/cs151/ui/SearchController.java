@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.*;
+import javafx.scene.control.Button;
 
 public class SearchController {
 
@@ -25,6 +28,8 @@ public class SearchController {
     private TableColumn<StudentProfile, String> colDatabases;
     @FXML
     private TableColumn<StudentProfile, String> colRole;
+    @FXML
+    private TableColumn<StudentProfile, Void> colActions;
 
     @FXML
     public void initialize() {
@@ -33,6 +38,38 @@ public class SearchController {
         colLanguages.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getLanguages()));
         colDatabases.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDatabases()));
         colRole.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPreferredRole()));
+        colActions.setCellFactory(col -> new TableCell<>() {
+            private final Button editButton = new Button("Edit");
+
+            {
+                editButton.setOnAction(e -> {
+                    StudentProfile selected = getTableView().getItems().get(getIndex());
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/edit_student.fxml"));
+                        Scene scene = new Scene(loader.load());
+
+                        // Pass student to edit page
+                        cs151.ui.EditStudentController controller = loader.getController();
+                        controller.loadStudent(selected);
+
+                        Stage stage = (Stage) ((javafx.scene.Node) e.getSource()).getScene().getWindow();
+                        stage.setScene(scene);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(editButton);
+                }
+            }
+        });
     }
 
     @FXML
