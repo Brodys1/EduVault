@@ -47,14 +47,6 @@ public class StudentProfilesController implements Initializable {
     }
 
     @FXML
-    private void handleDelete() {
-        StudentProfile selected = studentsTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            StudentRepository.getAll().remove(selected);
-        }
-    }
-
-    @FXML
     private void handleBack(ActionEvent event) throws Exception {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));

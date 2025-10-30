@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class StudentRepository {
 
@@ -22,9 +23,25 @@ public class StudentRepository {
         return students;
     }
 
+    public static ObservableList<StudentProfile> searchStudents(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return getAll();
+        }
+        String lowerQuery = query.toLowerCase().trim();
+        return students.stream()
+                .filter(student ->
+                        student.getFullName().toLowerCase().contains(lowerQuery) ||
+                        student.getAcademicStatus().toLowerCase().contains(lowerQuery) ||
+                        student.getLanguages().toLowerCase().contains(lowerQuery) ||
+                        student.getDatabases().toLowerCase().contains(lowerQuery) ||
+                        student.getPreferredRole().toLowerCase().contains(lowerQuery)
+                )
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
     public static boolean add(StudentProfile student) {
         // check if a student with the same name already exists
-        if (nameExists(student.getFullName())) {
+        if (nameExists(student.getFullName().replaceAll("\\s+", " ").trim())) {
             return false;
         }
 
@@ -85,7 +102,7 @@ public class StudentRepository {
                             p[5].trim(), // databases
                             p[6].trim(), // role
                             p[7].trim(), // comments
-                            p[8].trim()  // flags
+                            p[8].trim() // flags
                     ));
                 }
             }
@@ -102,7 +119,8 @@ public class StudentRepository {
 
     private static void saveToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
-            writer.println("FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags");
+            writer.println(
+                    "FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags");
 
             for (StudentProfile s : students) {
                 writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
@@ -119,5 +137,11 @@ public class StudentRepository {
         } catch (IOException e) {
             System.err.println("Error saving students file: " + e.getMessage());
         }
+    }
+
+    public static void remove(StudentProfile student) {
+        if (student == null) return;
+        students.remove(student);
+        saveToFile();
     }
 }
