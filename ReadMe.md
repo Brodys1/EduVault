@@ -1,11 +1,13 @@
 # Name of application: *EduVault*
 
-## Version: 0.6
+## Version: 0.7
 
 ## Who did what:
 
 Brody Smith
 
+- 0.7 | Managed repo, code review, fixed bugs
+- 0.7 | Redesigned homepage buttons
 - 0.6 | Implemented Search method
 - 0.6 | Trimmed whitespace for duplicate check when adding a student profile
 - 0.5 | Implemented StudentController.java & student.fxml

@@ -1,6 +1,6 @@
 FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags
 "alex","Freshman","Not Employed","","C++","Oracle","Full-Stack","hi","Whitelist"
 "bobby","Freshman","Not Employed","","Python","MySQL","Other","","None"
-"cory","Sophomore","Not Employed","","C++","Oracle","Full-Stack","","None"
 "cory","Sophomore","Employed","hi","Python, C++","MongoDB, Oracle, Postgres","Full-Stack","hi","Whitelist"
-"tavishi","Freshman","Employed","hi","Python","Postgres","MongoDB","Back-End","hi"
+"Karen","Graduate","Employed","Manager","Python","Postgres","Data","","Blacklist"
+"Tiffany","Junior","Employed","wendy's","Java, Python, C++","Postgres, MongoDB, Oracle","Other","","None"
