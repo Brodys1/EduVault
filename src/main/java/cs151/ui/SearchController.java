@@ -33,11 +33,16 @@ public class SearchController {
 
     @FXML
     public void initialize() {
-        colName.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getFullName()));
-        colStatus.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getAcademicStatus()));
-        colLanguages.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getLanguages()));
-        colDatabases.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDatabases()));
-        colRole.setCellValueFactory(data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPreferredRole()));
+        colName.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getFullName()));
+        colStatus.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getAcademicStatus()));
+        colLanguages.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getLanguages()));
+        colDatabases.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getDatabases()));
+        colRole.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getPreferredRole()));
         colActions.setCellFactory(col -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
 
@@ -45,7 +50,8 @@ public class SearchController {
                 editButton.setOnAction(e -> {
                     StudentProfile selected = getTableView().getItems().get(getIndex());
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/edit_student.fxml"));
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/cs151/application/edit_student.fxml"));
                         Scene scene = new Scene(loader.load());
 
                         // Pass student to edit page
@@ -78,7 +84,7 @@ public class SearchController {
         if (query.isEmpty()) {
             resultsTable.setItems(StudentRepository.getAll());
         } else {
-            ObservableList<StudentProfile> results = StudentRepository.search(query);
+            ObservableList<StudentProfile> results = StudentRepository.searchStudents(query);
             resultsTable.setItems(results);
         }
     }
