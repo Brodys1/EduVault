@@ -1,140 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
             fx:controller="cs151.ui.EditStudentController"
-            prefWidth="800" prefHeight="700">
+            prefWidth="540" prefHeight="520">
+
     <children>
-        <ScrollPane layoutX="0" layoutY="0" prefWidth="800" prefHeight="700" fitToWidth="true">
-            <content>
-                <VBox spacing="20" style="-fx-padding: 20;">
-                    <!-- Header -->
-                    <Label text="Edit Student Profile" style="-fx-font-size:24px; -fx-font-weight:bold;"/>
+        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+              AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+            <children>
 
-                    <!-- Basic Information Section -->
-                    <VBox spacing="10">
-                        <Label text="2.1 Basic Information" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+                <!-- TITLE -->
+                <Label text="Edit Student"
+                       style="-fx-font-size:16px; -fx-font-weight:bold;" />
 
-                        <!-- Full Name -->
-                        <HBox spacing="10">
-                            <Label text="Full Name:" prefWidth="150"/>
-                            <TextField fx:id="fullNameField" prefWidth="300" promptText="Enter full name"/>
-                            <Label fx:id="fullNameError" text="" style="-fx-text-fill: red;"/>
+                <!-- GRID WITH FIELDS -->
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" />
+                        <ColumnConstraints />
+                    </columnConstraints>
+
+                    <children>
+                        <!-- Full name -->
+                        <Label text="Full name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="fullNameField"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Academic status -->
+                        <Label text="Academic status:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="academicStatusCombo"
+                                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Employment -->
+                        <Label text="Employment:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <HBox spacing="12" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <children>
+                                <RadioButton fx:id="employedRadio" text="Employed"
+                                             toggleGroup="$empGroup"/>
+                                <RadioButton fx:id="notEmployedRadio" text="Not employed"
+                                             toggleGroup="$empGroup"/>
+                            </children>
                         </HBox>
 
-                        <!-- Academic Status -->
-                        <HBox spacing="10">
-                            <Label text="Academic Status:" prefWidth="150"/>
-                            <ComboBox fx:id="academicStatusCombo" prefWidth="200" promptText="Select status"/>
-                            <Label fx:id="academicStatusError" text="" style="-fx-text-fill: red;"/>
-                        </HBox>
+                        <!-- Job details -->
+                        <Label text="Job details:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="jobDetailsField"
+                                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                        <!-- Current Job Status -->
-                        <HBox spacing="10">
-                            <Label text="Current Job Status:" prefWidth="150"/>
-                            <RadioButton fx:id="employedRadio" text="Employed" toggleGroup="$jobStatusGroup"/>
-                            <RadioButton fx:id="notEmployedRadio" text="Not Employed" toggleGroup="$jobStatusGroup" selected="true"/>
-                        </HBox>
-
-                        <!-- Job Details -->
-                        <HBox spacing="10">
-                            <Label text="Job Details:" prefWidth="150"/>
-                            <TextField fx:id="jobDetailsField" prefWidth="400" promptText="Enter job details (required if employed)" disable="true"/>
-                            <Label fx:id="jobDetailsError" text="" style="-fx-text-fill: red;"/>
-                        </HBox>
-                    </VBox>
-
-                    <Separator/>
-
-                    <!-- Skills and Interests Section -->
-                    <VBox spacing="10">
-                        <Label text="2.2 Skills and Interests" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
-
-                        <!-- Programming Languages -->
-                        <HBox spacing="10">
-                            <Label text="Programming Languages:" prefWidth="150"/>
-                            <ListView fx:id="programmingLanguagesList" prefWidth="300" prefHeight="100"/>
-                            <VBox spacing="5">
-                                <Button text="Add Language" onAction="#addProgrammingLanguage"/>
-                                <Button text="Remove Language" onAction="#removeProgrammingLanguage"/>
-                            </VBox>
-                            <Label fx:id="programmingLanguagesError" text="" style="-fx-text-fill: red;"/>
-                        </HBox>
+                        <!-- Programming languages -->
+                        <Label text="Programming languages:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <ListView fx:id="languagesList"
+                                  prefHeight="250"
+                                  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
                         <!-- Databases -->
-                        <HBox spacing="10">
-                            <Label text="Databases Known:" prefWidth="150"/>
-                            <ListView fx:id="databasesList" prefWidth="300" prefHeight="100"/>
-                            <VBox spacing="5">
-                                <Button text="Add Database" onAction="#addDatabase"/>
-                                <Button text="Remove Database" onAction="#removeDatabase"/>
-                            </VBox>
-                            <Label fx:id="databasesError" text="" style="-fx-text-fill: red;"/>
-                        </HBox>
+                        <Label text="Databases:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <ListView fx:id="databasesList"
+                                  prefHeight="270"
+                                  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-                        <!-- Preferred Professional Role -->
-                        <HBox spacing="10">
-                            <Label text="Preferred Role:" prefWidth="150"/>
-                            <ComboBox fx:id="preferredRoleCombo" prefWidth="200" promptText="Select role"/>
-                            <Label fx:id="preferredRoleError" text="" style="-fx-text-fill: red;"/>
-                        </HBox>
-                    </VBox>
+                        <!-- Preferred role -->
+                        <Label text="Preferred role:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="preferredRoleCombo"
+                                  GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
 
-                    <Separator/>
+                <!-- Comments -->
+                <Label text="Comments:"/>
+                <TextArea fx:id="commentsArea" prefRowCount="2"/>
 
-                    <!-- Faculty Evaluation Section -->
-                    <VBox spacing="10">
-                        <Label text="2.3 Faculty Evaluation" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
+                <!-- Flags -->
+                <HBox spacing="14">
+                    <children>
+                        <Label text="Flags:"/>
+                        <CheckBox fx:id="whitelistCheck" text="Whitelist"/>
+                        <CheckBox fx:id="blacklistCheck" text="Blacklist"/>
+                    </children>
+                </HBox>
 
-                        <!-- Comments/Journal Entries -->
-                        <HBox spacing="10">
-                            <Label text="Comments/Journal:" prefWidth="150"/>
-                            <VBox spacing="5">
-                                <TextArea fx:id="commentsArea" prefWidth="400" prefHeight="100" promptText="Enter faculty comments or journal entries"/>
-                                <Button text="Add Comment" onAction="#addComment"/>
-                            </VBox>
-                        </HBox>
-                    </VBox>
-
-                    <Separator/>
-
-                    <!-- Future Services Flags Section -->
-                    <VBox spacing="10">
-                        <Label text="2.4 Future Services Flags" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
-
-                        <!-- Whitelist and Blacklist -->
-                        <HBox spacing="20">
-                            <CheckBox fx:id="whitelistCheck" text="Whitelist (eligible for additional support)"/>
-                            <CheckBox fx:id="blacklistCheck" text="Blacklist (no future services)"/>
-                        </HBox>
-                        <Label fx:id="flagsError" text="" style="-fx-text-fill: red;"/>
-                    </VBox>
-
-                    <!-- Action Buttons -->
-                    <HBox spacing="20" style="-fx-padding: 20 0 0 0;">
-                        <Button text="Save Changes" onAction="#saveEditedProfile" style="-fx-font-size:14px; -fx-pref-width:150;"/>
-                        <Button text="Clear Form" onAction="#clearForm" style="-fx-font-size:14px; -fx-pref-width:100;"/>
-                        <Button text="Back" onAction="#handleBack" style="-fx-font-size:14px; -fx-pref-width:100;"/>
-                    </HBox>
-
-                    <!-- Status Messages -->
-                    <Label fx:id="statusLabel" text="" style="-fx-font-size:12px;"/>
-                </VBox>
-            </content>
-        </ScrollPane>
+                <!-- BUTTON BAR -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <children>
+                        <!-- these names MUST match EditStudentController -->
+                        <Button text="Save" onAction="#handleSave"/>
+                        <Button text="Cancel" onAction="#handleCancel"/>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="0" right="0" bottom="0" left="0"/>
+            </padding>
+        </VBox>
     </children>
 </AnchorPane>
