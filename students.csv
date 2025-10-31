@@ -1,6 +1,6 @@
 FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags
-"alex","Freshman","Not Employed","","C++","Oracle","Full-Stack","hi","Whitelist"
-"bobby","Freshman","Not Employed","","Python","MySQL","Other","","None"
-"cory","Sophomore","Employed","hi","Python, C++","MongoDB, Oracle, Postgres","Full-Stack","hi","Whitelist"
-"Karen","Graduate","Employed","Manager","Python","Postgres","Data","","Blacklist"
-"Tiffany","Junior","Employed","wendy's","Java, Python, C++","Postgres, MongoDB, Oracle","Other","","None"
+"John Smith","Sophomore","Employed","Adobe","Python, Java","Postgres","Full-Stack","","Whitelist"
+"Karen Mucus","Freshman","Not Employed","","C++, Python","MongoDB, Oracle","Front-End","","Whitelist"
+"Leslie Knope","Senior","Employed","Politician","Python","Oracle","Data","","None"
+"Scott Green","Sophomore","Not Employed","","Java, Python, C++","MongoDB, Postgres","Back-End","","None"
+"Shelly Sells","Senior","Employed","Sea Shell Seller","Python","SQLite","Data","","Blacklist"
