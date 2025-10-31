@@ -6,7 +6,6 @@
 
 Brody Smith
 
-- 0.7 | Added professional role to search function and search table view
 - 0.7 | Managed repo, code review, fixed bugs (Removed "None" flag for null flag input on student creation)
 - 0.7 | Redesigned homepage buttons
 - 0.6 | Implemented Search method

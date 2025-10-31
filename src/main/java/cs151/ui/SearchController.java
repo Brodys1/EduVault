@@ -40,8 +40,6 @@ public class SearchController {
     @FXML
     private TableColumn<StudentProfile, String> colStatus;
     @FXML
-    private TableColumn<StudentProfile, String> colProfessionalRole;
-    @FXML
     private TableColumn<StudentProfile, String> colLanguages;
     @FXML
     private TableColumn<StudentProfile, String> colDatabases;
@@ -65,9 +63,6 @@ public class SearchController {
         }
         if (colStatus != null) {
             colStatus.setCellValueFactory(new PropertyValueFactory<>("academicStatus"));
-        }
-        if (colProfessionalRole != null) {
-            colProfessionalRole.setCellValueFactory(new PropertyValueFactory<>("jobDetails"));
         }
         if (colLanguages != null) {
             colLanguages.setCellValueFactory(new PropertyValueFactory<>("languages"));
