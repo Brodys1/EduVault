@@ -17,6 +17,8 @@ Brody Smith
 
 Chloe Pham
 
+- 0.7 | Fixed so search page refreshes after "save" with new edits
+- 0.7 | Implemented saving of edited student profiles (EditStudentController.java)
 - 0.6 | Implemented deletion of student function for student search page
 - 0.5 | Implemented to & back button for StudentController.java & student.fxml
 - 0.3 | Implemented LangTable.java
@@ -24,6 +26,7 @@ Chloe Pham
 
 Xuan Phuong Nguyen
 
+- 0.7 | Implemented the ability to edit student profiles (SearchController.java)
 - 0.6 | Makes search (name, academic status, programming language, database skill, or role) result appear in tabular format (search.fxml, SearchController.java and HomeController.java)
 - 0.5 | Implemented StudentProfilesController.java and StudentProfile.java
 - 0.5 | Implemented StudentRepository.java
@@ -33,6 +36,7 @@ Xuan Phuong Nguyen
 
 Tavishi Bansal
 
+- 0.7 | Added "Edit" button that leads to a student editing page (SearchController.java, edit_student.fxml)
 - 0.6 | Added “Search Students” Button to Home Screen
 - 0.6 | Implemented search.fxml & SearchController.java
 - 0.5 | Implemented StudentProfilesController.java and StudentProfile.java
