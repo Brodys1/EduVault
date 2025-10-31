@@ -34,6 +34,7 @@ public class StudentRepository {
                                 student.getAcademicStatus().toLowerCase().contains(lowerQuery) ||
                                 student.getLanguages().toLowerCase().contains(lowerQuery) ||
                                 student.getDatabases().toLowerCase().contains(lowerQuery) ||
+                                student.getJobDetails().toLowerCase().contains(lowerQuery) ||
                                 student.getPreferredRole().toLowerCase().contains(lowerQuery)
                 )
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));

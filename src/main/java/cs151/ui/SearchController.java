@@ -23,13 +23,13 @@ public class SearchController {
     @FXML
     private TextField searchField;
     @FXML
-    private Button searchButton;     // in FXML
+    private Button searchButton; // in FXML
     @FXML
-    private Button clearButton;      // "Reset" in FXML
+    private Button clearButton; // "Reset" in FXML
     @FXML
-    private Button deleteButton;     // "Delete Selected" in FXML
+    private Button deleteButton; // "Delete Selected" in FXML
     @FXML
-    private Button backButton;       // "Back to Home" in FXML
+    private Button backButton; // "Back to Home" in FXML
 
     // table
     @FXML
@@ -40,21 +40,22 @@ public class SearchController {
     @FXML
     private TableColumn<StudentProfile, String> colStatus;
     @FXML
+    private TableColumn<StudentProfile, String> colProfessionalRole;
+    @FXML
     private TableColumn<StudentProfile, String> colLanguages;
     @FXML
     private TableColumn<StudentProfile, String> colDatabases;
     @FXML
     private TableColumn<StudentProfile, String> colPreferredRole;
     @FXML
-    private TableColumn<StudentProfile, String> colComments;  // optional column
+    private TableColumn<StudentProfile, String> colComments; // optional column
     @FXML
-    private TableColumn<StudentProfile, String> colFlags;     // optional column
+    private TableColumn<StudentProfile, String> colFlags; // optional column
     @FXML
-    private TableColumn<StudentProfile, Void> colActions;     // EDIT column
+    private TableColumn<StudentProfile, Void> colActions; // EDIT column
 
     // local list we show in the table
-    private final ObservableList<StudentProfile> results =
-            FXCollections.observableArrayList();
+    private final ObservableList<StudentProfile> results = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
@@ -64,6 +65,9 @@ public class SearchController {
         }
         if (colStatus != null) {
             colStatus.setCellValueFactory(new PropertyValueFactory<>("academicStatus"));
+        }
+        if (colProfessionalRole != null) {
+            colProfessionalRole.setCellValueFactory(new PropertyValueFactory<>("jobDetails"));
         }
         if (colLanguages != null) {
             colLanguages.setCellValueFactory(new PropertyValueFactory<>("languages"));
@@ -148,8 +152,7 @@ public class SearchController {
     @FXML
     private void handleDelete(ActionEvent event) {
         // copy selection first
-        List<StudentProfile> selected =
-                new ArrayList<>(resultsTable.getSelectionModel().getSelectedItems());
+        List<StudentProfile> selected = new ArrayList<>(resultsTable.getSelectionModel().getSelectedItems());
 
         if (selected.isEmpty()) {
             new Alert(Alert.AlertType.INFORMATION,
@@ -179,8 +182,7 @@ public class SearchController {
     @FXML
     private void handleBack(ActionEvent event) {
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
             Parent homeRoot = loader.load();
 
             // REUSE current scene
@@ -203,8 +205,7 @@ public class SearchController {
 
             {
                 editBtn.setOnAction(e -> {
-                    StudentProfile student =
-                            getTableView().getItems().get(getIndex());
+                    StudentProfile student = getTableView().getItems().get(getIndex());
                     openEditPage(student);
                 });
             }
@@ -227,8 +228,7 @@ public class SearchController {
      */
     private void openEditPage(StudentProfile student) {
         try {
-            FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/cs151/application/edit_student.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/edit_student.fxml"));
             Parent root = loader.load();
 
             EditStudentController controller = loader.getController();

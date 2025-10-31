@@ -205,7 +205,7 @@ public class StudentController implements Initializable {
         String comments = commentsArea.getText().trim();
         String flags = whitelistCheck.isSelected() ? "Whitelist"
                 : blacklistCheck.isSelected() ? "Blacklist"
-                        : "None";
+                        : "";
 
         boolean success = cs151.application.StudentRepository.add(
                 new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,

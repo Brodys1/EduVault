@@ -35,13 +35,14 @@
             <columns>
                 <TableColumn fx:id="colName" text="Full Name" prefWidth="150"/>
                 <TableColumn fx:id="colStatus" text="Academic Status" prefWidth="120"/>
-                <TableColumn fx:id="colLanguages" text="Languages" prefWidth="200"/>
+                <TableColumn fx:id="colProfessionalRole" text="Professional Role" prefWidth="120"/>
+                <TableColumn fx:id="colLanguages" text="Languages" prefWidth="150"/>
                 <TableColumn fx:id="colDatabases" text="Databases" prefWidth="150"/>
                 <TableColumn fx:id="colPreferredRole" text="Preferred Role" prefWidth="120"/>
                 <TableColumn fx:id="colComments" text="Comments" prefWidth="200"/>
                 <TableColumn fx:id="colFlags" text="Flags" prefWidth="80"/>
                 <!-- friend's column -->
-                <TableColumn fx:id="colActions" text="Actions" prefWidth="90"/>
+                <TableColumn fx:id="colActions" text="Actions" prefWidth="50"/>
             </columns>
         </TableView>
     </center>
