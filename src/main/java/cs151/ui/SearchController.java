@@ -238,8 +238,10 @@ public class SearchController {
             dialog.setTitle("Edit Student");
             dialog.setScene(new Scene(root));
             dialog.setResizable(false);
-            dialog.show();
 
+            dialog.showAndWait();
+            handleSearch(null);
+            resultsTable.refresh();
         } catch (IOException ex) {
             ex.printStackTrace();
             new Alert(Alert.AlertType.ERROR,

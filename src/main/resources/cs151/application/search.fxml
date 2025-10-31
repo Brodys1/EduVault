@@ -19,7 +19,7 @@
                            HBox.hgrow="ALWAYS"
                            promptText="Search by name, academic status, languages, databases, or role"/>
                 <Button fx:id="searchButton" text="Search" />
-                <Button fx:id="clearButton" text="Reset" />
+                <Button fx:id="clearButton" text="Refresh" />
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button fx:id="backButton" text="Back to Home" />
                 <Button fx:id="deleteButton" text="Delete Selected" />
