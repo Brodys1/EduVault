@@ -31,10 +31,10 @@ public class StudentRepository {
         return students.stream()
                 .filter(student ->
                         student.getFullName().toLowerCase().contains(lowerQuery) ||
-                                student.getAcademicStatus().toLowerCase().contains(lowerQuery) ||
-                                student.getLanguages().toLowerCase().contains(lowerQuery) ||
-                                student.getDatabases().toLowerCase().contains(lowerQuery) ||
-                                student.getPreferredRole().toLowerCase().contains(lowerQuery)
+                        student.getAcademicStatus().toLowerCase().contains(lowerQuery) ||
+                        student.getLanguages().toLowerCase().contains(lowerQuery) ||
+                        student.getDatabases().toLowerCase().contains(lowerQuery) ||
+                        student.getPreferredRole().toLowerCase().contains(lowerQuery)
                 )
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
@@ -118,7 +118,7 @@ public class StudentRepository {
                             p[5].trim(), // databases
                             p[6].trim(), // role
                             p[7].trim(), // comments
-                            p[8].trim()  // flags
+                            p[8].trim() // flags
                     ));
                 }
             }

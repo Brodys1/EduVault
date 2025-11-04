@@ -40,7 +40,6 @@
                 <TableColumn fx:id="colPreferredRole" text="Preferred Role" prefWidth="120"/>
                 <TableColumn fx:id="colComments" text="Comments" prefWidth="200"/>
                 <TableColumn fx:id="colFlags" text="Flags" prefWidth="80"/>
-                <!-- friend's column -->
                 <TableColumn fx:id="colActions" text="Actions" prefWidth="50"/>
             </columns>
         </TableView>
