@@ -1,111 +1,246 @@
 package cs151.ui;
 
-import java.util.ArrayList;
-
 import cs151.application.StudentRepository;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-/**
- * Search Students Profiles page:
- * - Loads ALL profiles into the TableView on open (tabular format).
- * - Filters using StudentRepository.searchStudents(query).
- * - Reset shows all rows again.
- * - Back returns to Home.
- */
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchController {
 
-    // Top controls
-    @FXML private TextField searchField;
-    @FXML private Button searchButton;   // optional if wired in FXML
-    @FXML private Button clearButton;    // optional if wired in FXML
+    // top bar
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton; // in FXML
+    @FXML
+    private Button clearButton; // "Reset" in FXML
+    @FXML
+    private Button deleteButton; // "Delete Selected" in FXML
+    @FXML
+    private Button backButton; // "Back to Home" in FXML
 
-    // Table + columns
-    @FXML private TableView<StudentProfile> resultsTable;
-    @FXML private TableColumn<StudentProfile, String> colName;
-    @FXML private TableColumn<StudentProfile, String> colStatus;
-    @FXML private TableColumn<StudentProfile, String> colLanguages;
-    @FXML private TableColumn<StudentProfile, String> colDatabases;
-    @FXML private TableColumn<StudentProfile, String> colRole;
-    @FXML private TableColumn<StudentProfile, String> colComments; // NEW
-    @FXML private TableColumn<StudentProfile, String> colFlags;    // NEW
+    // table
+    @FXML
+    private TableView<StudentProfile> resultsTable;
 
     @FXML
-    public void initialize() {
-        // Column bindings (match getters in StudentProfile)
-        colName.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFullName()));
-        colStatus.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getAcademicStatus()));
-        colLanguages.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLanguages()));
-        colDatabases.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDatabases()));
-        colRole.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getPreferredRole()));
-        colComments.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getComments())); // NEW
-        colFlags.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFlags()));       // NEW
+    private TableColumn<StudentProfile, String> colName;
+    @FXML
+    private TableColumn<StudentProfile, String> colStatus;
+    @FXML
+    private TableColumn<StudentProfile, String> colLanguages;
+    @FXML
+    private TableColumn<StudentProfile, String> colDatabases;
+    @FXML
+    private TableColumn<StudentProfile, String> colPreferredRole;
+    @FXML
+    private TableColumn<StudentProfile, String> colComments; // optional column
+    @FXML
+    private TableColumn<StudentProfile, String> colFlags; // optional column
+    @FXML
+    private TableColumn<StudentProfile, Void> colActions; // EDIT column
 
-        // Show all rows in the TableView on page load
-        resultsTable.setItems(StudentRepository.getAll());
+    // local list we show in the table
+    private final ObservableList<StudentProfile> results = FXCollections.observableArrayList();
 
-        // UX: Enter triggers search; wire buttons if present
-        if (searchField != null) searchField.setOnAction(e -> handleSearch());
-        if (searchButton != null) searchButton.setOnAction(e -> handleSearch());
-        if (clearButton != null) clearButton.setOnAction(e -> handleClear());
+    @FXML
+    private void initialize() {
+        // 1) bind columns to StudentProfile
+        if (colName != null) {
+            colName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        }
+        if (colStatus != null) {
+            colStatus.setCellValueFactory(new PropertyValueFactory<>("academicStatus"));
+        }
+        if (colLanguages != null) {
+            colLanguages.setCellValueFactory(new PropertyValueFactory<>("languages"));
+        }
+        if (colDatabases != null) {
+            colDatabases.setCellValueFactory(new PropertyValueFactory<>("databases"));
+        }
+        if (colPreferredRole != null) {
+            colPreferredRole.setCellValueFactory(new PropertyValueFactory<>("preferredRole"));
+        }
+        // these two are on your “old” page
+        if (colComments != null) {
+            colComments.setCellValueFactory(new PropertyValueFactory<>("comments"));
+        }
+        if (colFlags != null) {
+            colFlags.setCellValueFactory(new PropertyValueFactory<>("flags"));
+        }
 
-        // Allows selection of multiple rows
+        // 2) add the Edit button column (your friend’s part)
+        if (colActions != null) {
+            setupActionsColumn();
+        }
+
+        // 3) load ALL when page opens
+        results.setAll(StudentRepository.getAll());
+        resultsTable.setItems(results);
+
+        // 4) allow multi-select for “Delete Selected”
         resultsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // 5) wire top controls to methods (in case FXML didn’t)
+        if (searchField != null) {
+            searchField.setOnAction(e -> handleSearch(null));
+        }
+        if (searchButton != null) {
+            searchButton.setOnAction(this::handleSearch);
+        }
+        if (clearButton != null) {
+            clearButton.setOnAction(this::handleClear);
+        }
+        if (deleteButton != null) {
+            deleteButton.setOnAction(this::handleDelete);
+        }
+        if (backButton != null) {
+            backButton.setOnAction(this::handleBack);
+        }
     }
 
+    /**
+     * Search button / press Enter
+     */
     @FXML
-    private void handleSearch() {
-        String query = searchField.getText() == null ? "" : searchField.getText().trim();
-        if (query.isEmpty()) {
-            resultsTable.setItems(StudentRepository.getAll());
+    private void handleSearch(ActionEvent event) {
+        String q = (searchField != null && searchField.getText() != null)
+                ? searchField.getText().trim()
+                : "";
+
+        if (q.isEmpty()) {
+            // no filter → show all
+            results.setAll(StudentRepository.getAll());
         } else {
-            ObservableList<StudentProfile> results = StudentRepository.searchStudents(query);
-            resultsTable.setItems(results);
+            results.setAll(StudentRepository.searchStudents(q));
         }
+        resultsTable.setItems(results);
     }
 
+    /**
+     * Reset button
+     */
     @FXML
-    private void handleClear() {
-        if (searchField != null) searchField.clear();
-        resultsTable.setItems(StudentRepository.getAll());
+    private void handleClear(ActionEvent event) {
+        if (searchField != null) {
+            searchField.clear();
+        }
+        results.setAll(StudentRepository.getAll());
+        resultsTable.setItems(results);
     }
 
+    /**
+     * Delete Selected button
+     */
     @FXML
-    private void handleBack() {
+    private void handleDelete(ActionEvent event) {
+        // copy selection first
+        List<StudentProfile> selected = new ArrayList<>(resultsTable.getSelectionModel().getSelectedItems());
+
+        if (selected.isEmpty()) {
+            new Alert(Alert.AlertType.INFORMATION,
+                    "Select one or more students first.").showAndWait();
+            return;
+        }
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,
+                "Delete " + selected.size() + " selected student(s)?",
+                ButtonType.OK, ButtonType.CANCEL);
+        var result = confirm.showAndWait();
+        if (result.isEmpty() || result.get() != ButtonType.OK) {
+            return;
+        }
+
+        for (StudentProfile s : selected) {
+            StudentRepository.remove(s);
+        }
+
+        // refresh
+        handleSearch(null);
+    }
+
+    /**
+     * Back to Home — but KEEP THE SAME SCENE so fullscreen stays
+     */
+    @FXML
+    private void handleBack(ActionEvent event) {
         try {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
-            Stage stage = (Stage) resultsTable.getScene().getWindow();
-            stage.setScene(new Scene(fxml.load()));
-        } catch (Exception ex) {
-            new Alert(Alert.AlertType.ERROR, "Could not load Home: " + ex.getMessage(),
-                    ButtonType.OK).showAndWait();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
+            Parent homeRoot = loader.load();
+
+            // REUSE current scene
+            Scene scene = resultsTable.getScene();
+            scene.setRoot(homeRoot);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,
+                    "Cannot return to Home page.").show();
         }
     }
 
-    @FXML
-private void handleDelete() {
-    // copy selection to a normal list so it won't change while we remove
-    var selected = new ArrayList<>(resultsTable.getSelectionModel().getSelectedItems());
+    /**
+     * Builds the "Edit" column
+     */
+    private void setupActionsColumn() {
+        colActions.setCellFactory(col -> new TableCell<>() {
+            private final Button editBtn = new Button("Edit");
 
-    if (selected.isEmpty()) {
-        new Alert(Alert.AlertType.INFORMATION, "Select one or more students first.", ButtonType.OK).showAndWait();
-        return;
+            {
+                editBtn.setOnAction(e -> {
+                    StudentProfile student = getTableView().getItems().get(getIndex());
+                    openEditPage(student);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(new HBox(5, editBtn));
+                }
+            }
+        });
     }
 
-    boolean confirmed = new Alert(Alert.AlertType.CONFIRMATION,
-            "Delete " + selected.size() + " selected student(s)?",
-            ButtonType.OK, ButtonType.CANCEL)
-        .showAndWait().filter(btn -> btn == ButtonType.OK).isPresent();
-    if (!confirmed) return;
+    /**
+     * Opens your edit_student.fxml and calls controller.loadStudent(...)
+     * → this is exactly your friend’s requirement
+     */
+    private void openEditPage(StudentProfile student) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/edit_student.fxml"));
+            Parent root = loader.load();
 
-    for (StudentProfile s : selected) {
-        StudentRepository.remove(s);
+            EditStudentController controller = loader.getController();
+            controller.loadStudent(student);
+
+            Stage dialog = new Stage();
+            dialog.setTitle("Edit Student");
+            dialog.setScene(new Scene(root));
+            dialog.setResizable(false);
+
+            dialog.showAndWait();
+            handleSearch(null);
+            resultsTable.refresh();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,
+                    "Cannot open edit_student.fxml").show();
+        }
     }
-
-    handleSearch();
-}
 }

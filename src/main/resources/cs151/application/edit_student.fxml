@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cs151.ui.EditStudentController"
+            prefWidth="540" prefHeight="520">
+
+    <children>
+        <VBox spacing="10" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+              AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+            <children>
+
+                <!-- TITLE -->
+                <Label text="Edit Student"
+                       style="-fx-font-size:16px; -fx-font-weight:bold;" />
+
+                <!-- GRID WITH FIELDS -->
+                <GridPane hgap="10" vgap="8">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="120" />
+                        <ColumnConstraints />
+                    </columnConstraints>
+
+                    <children>
+                        <!-- Full name -->
+                        <Label text="Full name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="fullNameField"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <!-- Academic status -->
+                        <Label text="Academic status:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="academicStatusCombo"
+                                  GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <!-- Employment -->
+                        <Label text="Employment:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <HBox spacing="12" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                            <children>
+                                <RadioButton fx:id="employedRadio" text="Employed"
+                                             toggleGroup="$empGroup"/>
+                                <RadioButton fx:id="notEmployedRadio" text="Not employed"
+                                             toggleGroup="$empGroup"/>
+                            </children>
+                        </HBox>
+
+                        <!-- Job details -->
+                        <Label text="Job details:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="jobDetailsField"
+                                   GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <!-- Programming languages -->
+                        <Label text="Programming languages:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <ListView fx:id="languagesList"
+                                  prefHeight="250"
+                                  GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                        <!-- Databases -->
+                        <Label text="Databases:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                        <ListView fx:id="databasesList"
+                                  prefHeight="270"
+                                  GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                        <!-- Preferred role -->
+                        <Label text="Preferred role:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="preferredRoleCombo"
+                                  GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    </children>
+                </GridPane>
+
+                <!-- Comments -->
+                <Label text="Comments:"/>
+                <TextArea fx:id="commentsArea" prefRowCount="2"/>
+
+                <!-- Flags -->
+                <HBox spacing="14">
+                    <children>
+                        <Label text="Flags:"/>
+                        <CheckBox fx:id="whitelistCheck" text="Whitelist"/>
+                        <CheckBox fx:id="blacklistCheck" text="Blacklist"/>
+                    </children>
+                </HBox>
+
+                <!-- BUTTON BAR -->
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <children>
+                        <!-- these names MUST match EditStudentController -->
+                        <Button text="Save" onAction="#handleSave"/>
+                        <Button text="Cancel" onAction="#handleCancel"/>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="0" right="0" bottom="0" left="0"/>
+            </padding>
+        </VBox>
+    </children>
+</AnchorPane>

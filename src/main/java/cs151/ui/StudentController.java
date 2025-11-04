@@ -23,49 +23,49 @@ import javafx.util.Callback;
 public class StudentController implements Initializable {
 
     @FXML
-    private TextField fullNameField;
+    protected TextField fullNameField;
     @FXML
-    private Label fullNameError;
+    protected Label fullNameError;
     @FXML
-    private ComboBox<String> academicStatusCombo;
+    protected ComboBox<String> academicStatusCombo;
     @FXML
-    private Label academicStatusError;
+    protected Label academicStatusError;
     @FXML
-    private RadioButton employedRadio;
+    protected RadioButton employedRadio;
     @FXML
-    private RadioButton notEmployedRadio;
+    protected RadioButton notEmployedRadio;
     @FXML
-    private TextField jobDetailsField;
+    protected TextField jobDetailsField;
     @FXML
-    private Label jobDetailsError;
+    protected Label jobDetailsError;
     @FXML
-    private ListView<String> programmingLanguagesList;
+    protected ListView<String> programmingLanguagesList;
     @FXML
-    private Label programmingLanguagesError;
+    protected Label programmingLanguagesError;
     @FXML
-    private ListView<String> databasesList;
+    protected ListView<String> databasesList;
     @FXML
-    private Label databasesError;
+    protected Label databasesError;
     @FXML
-    private ComboBox<String> preferredRoleCombo;
+    protected ComboBox<String> preferredRoleCombo;
     @FXML
-    private Label preferredRoleError;
+    protected Label preferredRoleError;
     @FXML
-    private TextArea commentsArea;
+    protected TextArea commentsArea;
     @FXML
-    private CheckBox whitelistCheck;
+    protected CheckBox whitelistCheck;
     @FXML
-    private CheckBox blacklistCheck;
+    protected CheckBox blacklistCheck;
     @FXML
-    private Label flagsError;
+    protected Label flagsError;
     @FXML
-    private Label statusLabel;
+    protected Label statusLabel;
 
-    private ToggleGroup jobStatusGroup;
-    private ObservableList<String> availableLanguages;
-    private ObservableList<String> availableDatabases;
-    private ObservableList<String> selectedLanguages;
-    private ObservableList<String> selectedDatabases;
+    protected ToggleGroup jobStatusGroup;
+    protected ObservableList<String> availableLanguages;
+    protected ObservableList<String> availableDatabases;
+    protected ObservableList<String> selectedLanguages;
+    protected ObservableList<String> selectedDatabases;
 
     // Hard-coded options
     private static final List<String> ACADEMIC_STATUSES = Arrays.asList(
@@ -205,7 +205,7 @@ public class StudentController implements Initializable {
         String comments = commentsArea.getText().trim();
         String flags = whitelistCheck.isSelected() ? "Whitelist"
                 : blacklistCheck.isSelected() ? "Blacklist"
-                        : "None";
+                        : "";
 
         boolean success = cs151.application.StudentRepository.add(
                 new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,
@@ -244,7 +244,7 @@ public class StudentController implements Initializable {
         stage.setScene(scene);
     }
 
-    private boolean validateForm() {
+    protected boolean validateForm() {
         boolean isValid = true;
 
         if (fullNameField.getText().trim().isEmpty()) {

@@ -52,10 +52,26 @@ public class StudentRepository {
     }
 
     /**
+     * NEW: overwrite an existing student.
+     * We match them by object (the one the search table gave us).
+     */
+    public static void updateStudent(StudentProfile original, StudentProfile edited) {
+        if (original == null || edited == null) return;
+
+        int idx = students.indexOf(original);
+        if (idx >= 0) {
+            students.set(idx, edited);
+        } else {
+            // fallback – if for some reason we didn't find it, just add it
+            students.add(edited);
+        }
+
+        sortStudents();
+        saveToFile();
+    }
+
+    /**
      * Check if a student with the given name already exists in the repository
-     * 
-     * @param fullName the name to check for
-     * @return true if a student with this name already exists, false otherwise
      */
     public static boolean nameExists(String fullName) {
         if (fullName == null || fullName.trim().isEmpty()) {

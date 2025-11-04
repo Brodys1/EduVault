@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Pos?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
@@ -11,20 +12,28 @@
       spacing="10"
       prefWidth="600" prefHeight="400">
     <children>
-        <Button text="Define Programming Languages"
-                onAction="#handleDefineLanguages"
-                prefWidth="200" maxWidth="250"/>
-        <Button text="View Programming Languages"
-                onAction="#handleLangTable"
-                prefWidth="200" maxWidth="250"/>
-        <Button text="Define Student Profile"
-                onAction="#handleDefineStudentProfile"
-                prefWidth="200" maxWidth="250"/>
-        <Button text="View All Student Profiles"
-                onAction="#handleViewAllStudents"
-                prefWidth="200" maxWidth="250"/>
         <Button text="Search Students"
                 onAction="#handleSearchStudents"
-                prefWidth="200" maxWidth="250"/>
+                prefWidth="300" maxWidth="400"/>
+        <HBox alignment="CENTER" spacing="10">
+            <children>
+                <Button text="Define Student Profile"
+                        onAction="#handleDefineStudentProfile"
+                        prefWidth="195" maxWidth="245"/>
+                <Button text="View Student Profiles"
+                        onAction="#handleViewAllStudents"
+                        prefWidth="195" maxWidth="245"/>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" spacing="10">
+            <children>
+                <Button text="Define Programming Languages"
+                        onAction="#handleDefineLanguages"
+                        prefWidth="195" maxWidth="245"/>
+                <Button text="View Programming Languages"
+                        onAction="#handleLangTable"
+                        prefWidth="195" maxWidth="245"/>
+            </children>
+        </HBox>
     </children>
 </VBox>

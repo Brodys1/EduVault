@@ -7,45 +7,50 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="cs151.ui.SearchController">
 
-    <!-- Top: title + search bar -->
     <top>
         <VBox spacing="8">
-            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
-            <Label text="Search Student Profiles" style="-fx-font-size:18px;-fx-font-weight:bold;"/>
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
+            <Label text="Search Student Profiles"
+                   style="-fx-font-size:18px;-fx-font-weight:bold;"/>
             <HBox spacing="8">
-                <TextField fx:id="searchField" HBox.hgrow="ALWAYS"
+                <TextField fx:id="searchField"
+                           HBox.hgrow="ALWAYS"
                            promptText="Search by name, academic status, languages, databases, or role"/>
-                <Button fx:id="searchButton" text="Search" onAction="#handleSearch"/>
-                <Button fx:id="clearButton" text="Reset" onAction="#handleClear"/>
+                <Button fx:id="searchButton" text="Search" />
+                <Button fx:id="clearButton" text="Refresh" />
                 <Region HBox.hgrow="ALWAYS"/>
-                <Button text="Back to Home" onAction="#handleBack"/>
-                <Button text="Delete Selected" onAction="#handleDelete"/>
+                <Button fx:id="backButton" text="Back to Home" />
+                <Button fx:id="deleteButton" text="Delete Selected" />
             </HBox>
         </VBox>
     </top>
 
-    <!-- Center: results table (tabular format) -->
     <center>
-        <TableView fx:id="resultsTable" prefHeight="520" prefWidth="1200" BorderPane.alignment="CENTER">
+        <TableView fx:id="resultsTable"
+                   prefHeight="520"
+                   prefWidth="1200"
+                   BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="colName" text="Full Name" prefWidth="180"/>
-                <TableColumn fx:id="colStatus" text="Academic Status" prefWidth="140"/>
-                <TableColumn fx:id="colLanguages" text="Languages" prefWidth="220"/>
+                <TableColumn fx:id="colName" text="Full Name" prefWidth="150"/>
+                <TableColumn fx:id="colStatus" text="Academic Status" prefWidth="120"/>
+                <TableColumn fx:id="colLanguages" text="Languages" prefWidth="150"/>
                 <TableColumn fx:id="colDatabases" text="Databases" prefWidth="150"/>
-                <TableColumn fx:id="colRole" text="Preferred Role" prefWidth="140"/>
-                <!-- NEW columns -->
-                <TableColumn fx:id="colComments" text="Comments" prefWidth="220"/>
-                <TableColumn fx:id="colFlags" text="Flags" prefWidth="100"/>
+                <TableColumn fx:id="colPreferredRole" text="Preferred Role" prefWidth="120"/>
+                <TableColumn fx:id="colComments" text="Comments" prefWidth="200"/>
+                <TableColumn fx:id="colFlags" text="Flags" prefWidth="80"/>
+                <TableColumn fx:id="colActions" text="Actions" prefWidth="50"/>
             </columns>
         </TableView>
     </center>
 
-    <!-- Bottom: tip bar -->
     <bottom>
         <HBox alignment="CENTER_RIGHT">
-            <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+            <padding>
+                <Insets top="8" right="8" bottom="8" left="8"/>
+            </padding>
             <Label text="Tip: Press Enter in the search box to filter."/>
         </HBox>
     </bottom>
-
 </BorderPane>
