@@ -18,7 +18,7 @@ import java.util.Comparator;
 
 public class LangTable extends Application {
 
-    private static final String CSV_FILE = "programming_languages.csv";
+    private static final String CSV_FILE = "data/programming_languages.csv";
 
     // define Language with its own getName() method
     public static class Language {

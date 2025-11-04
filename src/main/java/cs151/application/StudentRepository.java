@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StudentRepository {
 
     private static final ObservableList<StudentProfile> students = FXCollections.observableArrayList();
-    private static final String FILE_PATH = "students.csv";
+    private static final String FILE_PATH = "data/students.csv";
 
     // Load data when the class is first used
     static {

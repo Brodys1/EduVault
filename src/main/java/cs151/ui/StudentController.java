@@ -130,7 +130,7 @@ public class StudentController implements Initializable {
 
     private void loadProgrammingLanguages() {
         availableLanguages = FXCollections.observableArrayList();
-        try (BufferedReader reader = new BufferedReader(new FileReader("programming_languages.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/programming_languages.csv"))) {
             String line;
             boolean firstLine = true;
             while ((line = reader.readLine()) != null) {
