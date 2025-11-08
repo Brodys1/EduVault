@@ -98,7 +98,7 @@ public class EditStudentController {
         jobDetailsField.setText(student.getJobDetails());
 
         // comments
-        commentsArea.setText(student.getComments());
+        //commentsArea.setText(student.getComments());
 
         // flags
         String flags = student.getFlags() == null ? "" : student.getFlags().toLowerCase();
@@ -147,7 +147,7 @@ public class EditStudentController {
                 langs,
                 dbs,
                 preferredRoleCombo.getValue() == null ? "" : preferredRoleCombo.getValue(),
-                commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
+                //commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
                 buildFlags()
         );
 
