@@ -29,7 +29,6 @@ public class StudentProfilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 🔗 This is where binding happens
         nameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("academicStatus"));
         employmentCol.setCellValueFactory(new PropertyValueFactory<>("employmentStatus"));
