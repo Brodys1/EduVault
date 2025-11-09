@@ -4,17 +4,17 @@
 
 ### Version 0.8
 Brody Smith:
-- 
+- fill in
 
 Chloe Pham:
 - Implemented Comment.java & CommentRepository.java
 - Changed comments to save in comments.csv instead of students.csv
 
 Xuan Phuong Nguyen
--
+- fill in
 
 Tavishi Bansal
-- 
+- fill in
 
 ### Version 0.7
 Brody Smith:
