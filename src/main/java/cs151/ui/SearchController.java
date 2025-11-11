@@ -75,7 +75,7 @@ public class SearchController {
         }
         // these two are on your “old” page
         if (colComments != null) {
-            colComments.setCellValueFactory(new PropertyValueFactory<>("comments"));
+            setupCommentsColumn();
         }
         if (colFlags != null) {
             colFlags.setCellValueFactory(new PropertyValueFactory<>("flags"));
@@ -241,6 +241,55 @@ public class SearchController {
             ex.printStackTrace();
             new Alert(Alert.AlertType.ERROR,
                     "Cannot open edit_student.fxml").show();
+        }
+    }
+
+    /**
+     * Builds the "View Comments" button column
+     */
+    private void setupCommentsColumn() {
+        colComments.setCellFactory(col -> new TableCell<>() {
+            private final Button viewCommentsBtn = new Button("View Comments");
+
+            {
+                viewCommentsBtn.setOnAction(e -> {
+                    StudentProfile student = getTableView().getItems().get(getIndex());
+                    openCommentsPage(student);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(new HBox(5, viewCommentsBtn));
+                }
+            }
+        });
+    }
+
+    /**
+     * Opens a page showing all comments for the selected student
+     */
+    private void openCommentsPage(StudentProfile student) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/student_comments.fxml"));
+            Parent root = loader.load();
+
+            StudentCommentsController controller = loader.getController();
+            controller.loadComments(student.getFullName());
+
+            Stage dialog = new Stage();
+            dialog.setTitle("Comments for " + student.getFullName());
+            dialog.setScene(new Scene(root));
+
+            dialog.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,
+                    "Cannot open student_comments.fxml").show();
         }
     }
 }
