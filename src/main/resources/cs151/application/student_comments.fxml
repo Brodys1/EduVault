@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="cs151.ui.StudentCommentsController"
-            prefWidth="600" prefHeight="400">
+            prefWidth="600" prefHeight="420">
 
     <top>
         <VBox spacing="10">
             <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
+                <Insets top="15" right="15" bottom="10" left="15"/>
             </padding>
-            <Label fx:id="studentNameLabel" 
-                   text="Comments for: Student Name"
-                   style="-fx-font-size:16px;-fx-font-weight:bold;"/>
-            <Separator/>
+            <Label text="Comments for:" style="-fx-font-weight:bold;"/>
+            <Label fx:id="studentNameLabel" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
         </VBox>
     </top>
 
     <center>
         <VBox spacing="10">
             <padding>
-                <Insets top="10" right="15" bottom="10" left="15"/>
+                <Insets top="5" right="15" bottom="10" left="15"/>
             </padding>
+
             <Label text="All Comments:" style="-fx-font-weight:bold;"/>
-            <ListView fx:id="commentsListView" 
-                     VBox.vgrow="ALWAYS"
-                     prefHeight="280"/>
+            <ListView fx:id="commentsListView" VBox.vgrow="ALWAYS" prefHeight="220"/>
+
+            <Separator/>
+
+            <Label text="Add a new comment:"/>
+            <TextArea fx:id="newCommentArea" prefRowCount="3" promptText="Type a comment…"/>
+
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button fx:id="addCommentButton" text="Add Comment" onAction="#handleAddComment"/>
+            </HBox>
         </VBox>
     </center>
 
