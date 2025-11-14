@@ -74,14 +74,19 @@ public class StudentCommentsController {
             return;
         }
 
-        // In-memory only: add a Comment object to the global list (NO save),
-        // and update this page's local view.
-        CommentRepository.getAll().add(new Comment(studentName, text.trim()));
-        studentComments.add(0, text.trim()); // put newest at top
-        commentsListView.refresh();
+        // Create new comment and save it permanently
+        Comment newComment = new Comment(studentName, text.trim());
+        boolean saved = CommentRepository.add(newComment);
 
-        newCommentArea.clear();
-        showInfo("Comment added (in memory only — not saved to file).");
+        if (saved) {
+            // Refresh local view
+            studentComments.add(0, text.trim());
+            commentsListView.refresh();
+            newCommentArea.clear();
+            showInfo("Comment added and saved permanently.");
+        } else {
+            showError("Failed to save comment. Please try again.");
+        }
     }
 
     @FXML
