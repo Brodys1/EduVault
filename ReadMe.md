@@ -14,7 +14,11 @@ Xuan Phuong Nguyen
 - fill in
 
 Tavishi Bansal
-- fill in
+- Modified Comment.java and CommentRepository.java to include a new date field.
+- Updated the CSV file format to "FullName, Comment, Date" with quoted values.
+- Updated StudentCommentsController.java to:
+-   Automatically add today’s date when a new comment is created.
+-   Display all comments with their associated date stamps.
 
 ### Version 0.7
 Brody Smith:
