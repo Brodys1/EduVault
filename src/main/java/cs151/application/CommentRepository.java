@@ -66,11 +66,15 @@ public class CommentRepository {
                     p[i] = p[i].replaceAll("^\"|\"$", "").trim();
                 }
 
-                if (p.length >= 2) {
+                if (p.length >= 3) {
                     comments.add(new Comment(
-                            p[0].trim(), // FullName
-                            p[1].trim()  // Comments
+                            p[0].trim(), // full name
+                            p[1].trim(), // comment
+                            p[2].trim()  // date
                     ));
+                } else if (p.length == 2) {
+                    // for backwards compatibility (no date column)
+                    comments.add(new Comment(p[0].trim(), p[1].trim(), ""));
                 }
             }
             System.out.println("Loaded " + comments.size() + " comment rows from file.");
@@ -86,11 +90,12 @@ public class CommentRepository {
 
     private static void saveToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(COMMENT_PATH))) {
-            writer.println("FullName,Comments");
+            writer.println("FullName,Comment,Date");
             for (Comment c : comments) {
-                writer.printf("\"%s\",\"%s\"%n",
+                writer.printf("\"%s\",\"%s\",\"%s\"%n",
                         c.getFullName(),
-                        c.getComment());
+                        c.getComment(),
+                        c.getDate());
             }
         } catch (IOException e) {
             System.err.println("Error saving comments file: " + e.getMessage());

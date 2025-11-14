@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.stream.Collectors;
 public class StudentCommentsController {
@@ -40,7 +42,7 @@ public class StudentCommentsController {
         var myComments = CommentRepository.getAll()
                 .stream()
                 .filter(c -> c.getFullName().equalsIgnoreCase(studentName))
-                .map(Comment::getComment)
+                .map(c -> (c.getDate().isEmpty() ? "" : c.getDate() + " — ") + c.getComment())
                 .collect(Collectors.toList());
 
         studentComments.setAll(myComments);
@@ -74,16 +76,19 @@ public class StudentCommentsController {
             return;
         }
 
-        // Create new comment and save it permanently
-        Comment newComment = new Comment(studentName, text.trim());
+        // Format today's date (YYYY-MM-DD)
+        String today = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
+
+        // Create new comment and save permanently
+        Comment newComment = new Comment(studentName, text.trim(), today);
         boolean saved = CommentRepository.add(newComment);
 
         if (saved) {
-            // Refresh local view
-            studentComments.add(0, text.trim());
+            // Show comment with its date
+            studentComments.add(0, today + " — " + text.trim());
             commentsListView.refresh();
             newCommentArea.clear();
-            showInfo("Comment added and saved permanently.");
+            showInfo("Comment added with today's date.");
         } else {
             showError("Failed to save comment. Please try again.");
         }
