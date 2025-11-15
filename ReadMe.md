@@ -12,7 +12,7 @@ Chloe Pham:
 - Changed comments to save in comments.csv instead of students.csv
 
 Xuan Phuong Nguyen
-- fill in
+- Implement add comment feature (StudentCommentsController.java and student_comments.fxml)
 
 Tavishi Bansal
 - Modified Comment.java and CommentRepository.java to include a new date field.
