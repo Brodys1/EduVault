@@ -4,7 +4,8 @@
 
 ### Version 0.8
 Brody Smith:
-- fill in
+- Added button to view comments in SearchController and StudentProfilesController
+- Added template page for viewing comments for a specific student
 
 Chloe Pham:
 - Implemented Comment.java & CommentRepository.java
