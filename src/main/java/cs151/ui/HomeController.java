@@ -3,8 +3,11 @@ package cs151.ui;
 import cs151.application.LangTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 public class HomeController {
 
@@ -60,6 +63,18 @@ public class HomeController {
                     "Failed to open Search page:\n" + ex.getMessage(),
                     javafx.scene.control.ButtonType.OK
             ).showAndWait();
+        }
+    }
+    public void handleReports(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/reports.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Reports");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to open Reports page:\n" + ex.getMessage(), ButtonType.OK).showAndWait();
         }
     }
 }
