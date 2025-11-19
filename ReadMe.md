@@ -13,7 +13,10 @@ Xuan Phuong Nguyen
 - 
 
 Tavishi Bansal
-- 
+- Implemented Reports page (reports.fxml, ReportsController.java) to display whitelisted and blacklisted students in tabular format.
+- Added “View Reports” button on Home page and integrated navigation to reports page.
+- Enabled filtering via checkboxes to toggle between Whitelisted, Blacklisted, or both student lists.
+- Connected report data dynamically to StudentRepository for real-time updates.
 
 ### Version 0.8
 Brody Smith:
