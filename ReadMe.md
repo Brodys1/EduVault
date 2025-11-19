@@ -2,19 +2,37 @@
 
 ## Who did what:
 
+### Version 0.9
+Brody Smith:
+- 
+
+Chloe Pham:
+- 
+
+Xuan Phuong Nguyen
+- 
+
+Tavishi Bansal
+- 
+
 ### Version 0.8
 Brody Smith:
-- fill in
+- Added button to view comments in SearchController and StudentProfilesController
+- Added template page for viewing comments for a specific student
 
 Chloe Pham:
 - Implemented Comment.java & CommentRepository.java
 - Changed comments to save in comments.csv instead of students.csv
 
 Xuan Phuong Nguyen
-- fill in
+- Implement add comment feature (StudentCommentsController.java and student_comments.fxml)
 
 Tavishi Bansal
-- fill in
+- Modified Comment.java and CommentRepository.java to include a new date field.
+- Updated the CSV file format to "FullName, Comment, Date" with quoted values.
+- Updated StudentCommentsController.java to:
+-   Automatically add today’s date when a new comment is created.
+-   Display all comments with their associated date stamps.
 
 ### Version 0.7
 Brody Smith:
