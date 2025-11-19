@@ -6,11 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +32,6 @@ public class StudentProfilesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // 🔗 This is where binding happens
         nameCol.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("academicStatus"));
         employmentCol.setCellValueFactory(new PropertyValueFactory<>("employmentStatus"));
@@ -37,7 +39,11 @@ public class StudentProfilesController implements Initializable {
         langCol.setCellValueFactory(new PropertyValueFactory<>("languages"));
         dbCol.setCellValueFactory(new PropertyValueFactory<>("databases"));
         roleCol.setCellValueFactory(new PropertyValueFactory<>("preferredRole"));
-        commentsCol.setCellValueFactory(new PropertyValueFactory<>("comments"));
+        
+        if (commentsCol != null) {
+            setupCommentsColumn();
+        }
+        
         flagsCol.setCellValueFactory(new PropertyValueFactory<>("flags"));
 
         // Load saved data from repository
@@ -51,5 +57,52 @@ public class StudentProfilesController implements Initializable {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));
         stage.setScene(scene);
+    }
+
+    private void setupCommentsColumn() {
+        commentsCol.setCellFactory(col -> new TableCell<>() {
+            private final Button viewCommentsBtn = new Button("View Comments");
+
+            {
+                viewCommentsBtn.setOnAction(e -> {
+                    StudentProfile student = getTableView().getItems().get(getIndex());
+                    openCommentsPage(student);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(new HBox(5, viewCommentsBtn));
+                }
+            }
+        });
+    }
+
+    /**
+     * Opens a page showing all comments for the selected student
+     */
+    private void openCommentsPage(StudentProfile student) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/student_comments.fxml"));
+            Parent root = loader.load();
+
+            StudentCommentsController controller = loader.getController();
+            controller.loadComments(student.getFullName());
+
+            Stage dialog = new Stage();
+            dialog.setTitle("Comments for " + student.getFullName());
+            dialog.setScene(new Scene(root));
+            dialog.setResizable(false);
+
+            dialog.showAndWait();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,
+                    "Cannot open student_comments.fxml").show();
+        }
     }
 }

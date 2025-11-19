@@ -20,7 +20,7 @@ public class ProgrammingLanguagesController {
     @FXML
     private Label messageLabel;
 
-    private static final String CSV_FILE = "programming_languages.csv";
+    private static final String CSV_FILE = "data/programming_languages.csv";
 
     public void handleSave(ActionEvent event) {
         String languageName = nameField.getText().trim();

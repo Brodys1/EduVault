@@ -2,7 +2,6 @@ package cs151.ui;
 
 import cs151.application.StudentRepository;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -99,7 +98,7 @@ public class EditStudentController {
         jobDetailsField.setText(student.getJobDetails());
 
         // comments
-        commentsArea.setText(student.getComments());
+        //commentsArea.setText(student.getComments());
 
         // flags
         String flags = student.getFlags() == null ? "" : student.getFlags().toLowerCase();
@@ -148,7 +147,7 @@ public class EditStudentController {
                 langs,
                 dbs,
                 preferredRoleCombo.getValue() == null ? "" : preferredRoleCombo.getValue(),
-                commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
+                //commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
                 buildFlags()
         );
 

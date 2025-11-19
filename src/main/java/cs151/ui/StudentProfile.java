@@ -19,7 +19,7 @@ public class StudentProfile {
             String languages,
             String databases,
             String preferredRole,
-            String comments,
+            //String comments,
             String flags
     ) {
         this.fullName = fullName;
@@ -29,7 +29,7 @@ public class StudentProfile {
         this.languages = languages;
         this.databases = databases;
         this.preferredRole = preferredRole;
-        this.comments = comments;
+        //this.comments = comments;
         this.flags = flags;
     }
 
@@ -41,6 +41,6 @@ public class StudentProfile {
     public String getLanguages() { return languages; }
     public String getDatabases() { return databases; }
     public String getPreferredRole() { return preferredRole; }
-    public String getComments() { return comments; }
+    //public String getComments() { return comments; }
     public String getFlags() { return flags; }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StudentRepository {
 
     private static final ObservableList<StudentProfile> students = FXCollections.observableArrayList();
-    private static final String FILE_PATH = "students.csv";
+    private static final String FILE_PATH = "data/students.csv";
 
     // Load data when the class is first used
     static {
@@ -108,7 +108,7 @@ public class StudentRepository {
                     p[i] = p[i].replaceAll("^\"|\"$", "").trim();
                 }
 
-                if (p.length >= 9) {
+                if (p.length >= 8) {
                     students.add(new StudentProfile(
                             p[0].trim(), // full name
                             p[1].trim(), // academic status
@@ -117,8 +117,8 @@ public class StudentRepository {
                             p[4].trim(), // languages
                             p[5].trim(), // databases
                             p[6].trim(), // role
-                            p[7].trim(), // comments
-                            p[8].trim() // flags
+                            //p[7].trim(), // comments
+                            p[7].trim() // flags
                     ));
                 }
             }
@@ -136,10 +136,10 @@ public class StudentRepository {
     private static void saveToFile() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             writer.println(
-                    "FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Comments,Flags");
+                    "FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Flags");
 
             for (StudentProfile s : students) {
-                writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
+                writer.printf("\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"%n",
                         s.getFullName(),
                         s.getAcademicStatus(),
                         s.getEmploymentStatus(),
@@ -147,7 +147,7 @@ public class StudentRepository {
                         s.getLanguages(),
                         s.getDatabases(),
                         s.getPreferredRole(),
-                        s.getComments(),
+                        //s.getComments(),
                         s.getFlags());
             }
         } catch (IOException e) {

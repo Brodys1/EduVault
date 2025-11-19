@@ -130,7 +130,7 @@ public class StudentController implements Initializable {
 
     private void loadProgrammingLanguages() {
         availableLanguages = FXCollections.observableArrayList();
-        try (BufferedReader reader = new BufferedReader(new FileReader("programming_languages.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/programming_languages.csv"))) {
             String line;
             boolean firstLine = true;
             while ((line = reader.readLine()) != null) {
@@ -177,15 +177,15 @@ public class StudentController implements Initializable {
                 }));
     }
 
-    @FXML
-    private void addComment() {
-        String comment = commentsArea.getText().trim();
-        if (!comment.isEmpty())
-            // TODO Change this to make multiple entries instead
-            commentsArea.setText(comment + "\n\n");
-        commentsArea.positionCaret(commentsArea.getText().length());
+    // @FXML
+    // private void addComment() {
+    //     String comment = commentsArea.getText().trim();
+    //     if (!comment.isEmpty())
+    //         // TODO Change this to make multiple entries instead
+    //         commentsArea.setText(comment + "\n\n");
+    //     commentsArea.positionCaret(commentsArea.getText().length());
 
-    }
+    // }
 
     @FXML
     private void saveStudentProfile() {
@@ -209,9 +209,10 @@ public class StudentController implements Initializable {
 
         boolean success = cs151.application.StudentRepository.add(
                 new StudentProfile(fullName, academicStatus, employmentStatus, jobDetails,
-                        languages, databases, preferredRole, comments, flags));
+                        languages, databases, preferredRole, flags));
 
         if (success) {
+            cs151.application.CommentRepository.add(new cs151.ui.Comment(fullName, comments));
             statusLabel.setText("Profile saved successfully!");
             statusLabel.setStyle("-fx-text-fill: blue;");
             clearForm();
