@@ -3,4 +3,5 @@ FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,
 "Karen Mucus","Freshman","Not employed","","Python, C++","MongoDB, Oracle","Front-End","Blacklist"
 "Leslie Knope","Senior","Employed","Politician","Python","Oracle","Data","Blacklist"
 "Scott Green","Sophomore","Not employed","","Java, Python, C++","Postgres, MongoDB","Back-End","Whitelist"
-"Shelly Sells","Senior","Employed","Sea Shell Seller","Python","SQLite","Data",""
+"Shelly Sells","Senior","Employed","Sea Shell Seller","Python","SQLite","Data","Blacklist"
+"Terry Fyka","Junior","Employed","Statistician","Java, C++","Oracle","Data","Whitelist"
