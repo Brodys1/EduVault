@@ -20,8 +20,8 @@
         <VBox spacing="15">
             <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
             <HBox spacing="20" alignment="CENTER">
-                <RadioButton fx:id="whitelistRadio" text="Whitelisted Students" toggleGroup="$filterGroup"/>
-                <RadioButton fx:id="blacklistRadio" text="Blacklisted Students" toggleGroup="$filterGroup"/>
+                <CheckBox fx:id="whitelistCheck" text="Whitelisted Students"/>
+                <CheckBox fx:id="blacklistCheck" text="Blacklisted Students"/>
                 <Button text="Refresh" onAction="#handleRefresh"/>
             </HBox>
 

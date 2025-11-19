@@ -10,13 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class ReportsController {
 
-    @FXML private RadioButton whitelistRadio;
-    @FXML private RadioButton blacklistRadio;
+    @FXML private CheckBox whitelistCheck;
+    @FXML private CheckBox blacklistCheck;
     @FXML private TableView<StudentProfile> reportsTable;
 
     @FXML private TableColumn<StudentProfile, String> colName;
@@ -29,33 +28,45 @@ public class ReportsController {
 
     @FXML
     private void initialize() {
-        // Bind table columns
-        colName.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getFullName()));
-        colStatus.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getAcademicStatus()));
-        colLanguages.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getLanguages()));
-        colDatabases.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getDatabases()));
-        colRole.setCellValueFactory(cell -> new javafx.beans.property.SimpleStringProperty(cell.getValue().getPreferredRole()));
+        // Bind columns
+        colName.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFullName()));
+        colStatus.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getAcademicStatus()));
+        colLanguages.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLanguages()));
+        colDatabases.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDatabases()));
+        colRole.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getPreferredRole()));
 
         reportsTable.setItems(displayedStudents);
 
-        // Default: show whitelisted
-        whitelistRadio.setSelected(true);
-        updateTable("Whitelist");
+        // Default: show all (both selected)
+        whitelistCheck.setSelected(true);
+        blacklistCheck.setSelected(true);
+        updateTable();
+
+        // Auto-update when toggles change
+        whitelistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
+        blacklistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
     }
 
     @FXML
     private void handleRefresh(ActionEvent event) {
-        if (whitelistRadio.isSelected()) {
-            updateTable("Whitelist");
-        } else if (blacklistRadio.isSelected()) {
-            updateTable("Blacklist");
-        }
+        updateTable();
     }
 
-    private void updateTable(String flag) {
-        displayedStudents.setAll(
-                StudentRepository.getAll().filtered(s -> s.getFlags().equalsIgnoreCase(flag))
-        );
+    private void updateTable() {
+        var all = StudentRepository.getAll();
+        ObservableList<StudentProfile> filtered = FXCollections.observableArrayList();
+
+        if (whitelistCheck.isSelected() && blacklistCheck.isSelected()) {
+            filtered.setAll(all); // show all
+        } else if (whitelistCheck.isSelected()) {
+            filtered.setAll(all.filtered(s -> "Whitelist".equalsIgnoreCase(s.getFlags())));
+        } else if (blacklistCheck.isSelected()) {
+            filtered.setAll(all.filtered(s -> "Blacklist".equalsIgnoreCase(s.getFlags())));
+        } else {
+            filtered.clear(); // none selected
+        }
+
+        displayedStudents.setAll(filtered);
     }
 
     @FXML
