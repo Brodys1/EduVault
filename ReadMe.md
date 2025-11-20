@@ -9,10 +9,11 @@ Brody Smith:
 - Bug Fix: Made title bar consistent when going back and forth between views
 
 Chloe Pham:
-- 
+- Added double click functionality on student detail page to view full comment content
+- Implemented CommentDetailController.java & comment_detail.fxml 
 
 Xuan Phuong Nguyen
-- 
+- Added comment table-view to bottom of student detail page
 
 Tavishi Bansal
 - Implemented Reports page (reports.fxml, ReportsController.java) to display whitelisted and blacklisted students in tabular format.

@@ -1,13 +1,21 @@
 package cs151.ui;
 
+import java.io.IOException;
+
 import cs151.application.CommentRepository;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import javafx.scene.input.MouseButton;
 
 public class StudentDetailController {
 
@@ -63,7 +71,22 @@ public class StudentDetailController {
                     setStyle("-fx-text-overrun: ellipsis;");
                 }
             });
+
+            commentsTable.setRowFactory(tableView -> {
+                TableRow<Comment> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY
+                            && event.getClickCount() == 2
+                            && !row.isEmpty()) {
+                        Comment selected = row.getItem();
+                        openCommentDetail(selected);
+                    }
+                });
+                return row;
+            });
         }
+
+        
     }
 
     public void setStudent(StudentProfile student) {
@@ -119,5 +142,28 @@ public class StudentDetailController {
     private void handleClose(ActionEvent event) {
         Stage stage = (Stage) fullNameField.getScene().getWindow();
         stage.close();
+    }
+
+    private void openCommentDetail(Comment comment) {
+        if (comment == null) {
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/comment_detail.fxml"));
+            Parent root = loader.load();
+
+            CommentDetailController controller = loader.getController();
+            controller.setComment(comment);
+
+            Stage detailStage = new Stage();
+            detailStage.setTitle("Comment — " + student.getFullName());
+            detailStage.initModality(Modality.APPLICATION_MODAL);
+            detailStage.setScene(new Scene(root));
+            detailStage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Cannot open comment: " + e.getMessage()).show();
+        }
     }
 }
