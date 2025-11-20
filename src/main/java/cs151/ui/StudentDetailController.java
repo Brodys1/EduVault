@@ -21,7 +21,7 @@ public class StudentDetailController {
     @FXML private Label preferredRoleField;
     @FXML private Label flagsField;
 
-    // ---- Comments table for Task #3 ----
+    // ----  Comments table ---- 
     @FXML private TableView<Comment> commentsTable;
     @FXML private TableColumn<Comment, String> colDate;
     @FXML private TableColumn<Comment, String> colComment;
