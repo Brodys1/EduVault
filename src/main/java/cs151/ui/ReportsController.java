@@ -109,6 +109,8 @@ public class ReportsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/home.fxml"));
             Parent root = loader.load();
             Scene scene = ((Button) event.getSource()).getScene();
+            Stage stage = (Stage) scene.getWindow();
+            stage.setTitle("EduVault — Team 31");
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

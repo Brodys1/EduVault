@@ -6,6 +6,7 @@
 Brody Smith:
 - Implemented double click functionality on reports page to view students information
 - Created a read-only form layout to display students information
+- Bug Fix: Made title bar consistent when going back and forth between views
 
 Chloe Pham:
 - 

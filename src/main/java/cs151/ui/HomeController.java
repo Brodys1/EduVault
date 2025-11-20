@@ -15,6 +15,7 @@ public class HomeController {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(
                 FXMLLoader.load(getClass().getResource("/cs151/application/programming_languages.fxml")));
+        stage.setTitle("Define Programming Languages");
         stage.setScene(scene);
     }
 
@@ -34,6 +35,7 @@ public class HomeController {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(
                 FXMLLoader.load(getClass().getResource("/cs151/application/student.fxml")));
+        stage.setTitle("Define Student Profile");
         stage.setScene(scene);
     }
 
