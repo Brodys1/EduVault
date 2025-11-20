@@ -6,10 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import java.util.stream.Collectors;
+
 public class StudentCommentsController {
 
     @FXML private Label studentNameLabel;
@@ -17,7 +18,7 @@ public class StudentCommentsController {
     // Existing list UI
     @FXML private ListView<String> commentsListView;
 
-    // New input controls for #3 (non-persistent add)
+    // New input controls for add
     @FXML private TextArea newCommentArea;
     @FXML private Button addCommentButton;
 
@@ -64,6 +65,7 @@ public class StudentCommentsController {
             });
         }
     }
+
     @FXML
     private void handleAddComment() {
         if (studentName == null || studentName.isBlank()) {
@@ -81,17 +83,15 @@ public class StudentCommentsController {
 
         // Create new comment and save permanently
         Comment newComment = new Comment(studentName, text.trim(), today);
-        boolean saved = CommentRepository.add(newComment);
 
-        if (saved) {
-            // Show comment with its date
-            studentComments.add(0, today + " — " + text.trim());
-            commentsListView.refresh();
-            newCommentArea.clear();
-            showInfo("Comment added with today's date.");
-        } else {
-            showError("Failed to save comment. Please try again.");
-        }
+        // CommentRepository.add(...) is void, so just call it
+        CommentRepository.add(newComment);
+
+        // Show comment with its date in the list
+        studentComments.add(0, today + " — " + text.trim());
+        commentsListView.refresh();
+        newCommentArea.clear();
+        showInfo("Comment added with today's date.");
     }
 
     @FXML
