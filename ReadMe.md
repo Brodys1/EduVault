@@ -4,7 +4,8 @@
 
 ### Version 0.9
 Brody Smith:
-- 
+- Implemented double click functionality on reports page to view students information
+- Created a read-only form layout to display students information
 
 Chloe Pham:
 - 

@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -45,6 +47,16 @@ public class ReportsController {
         // Auto-update when toggles change
         whitelistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
         blacklistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
+
+        // Handle double-click on table row
+        reportsTable.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                StudentProfile selected = reportsTable.getSelectionModel().getSelectedItem();
+                if (selected != null) {
+                    openStudentDetail(selected);
+                }
+            }
+        });
     }
 
     @FXML
@@ -67,6 +79,28 @@ public class ReportsController {
         }
 
         displayedStudents.setAll(filtered);
+    }
+
+    /**
+     * Open a new window showing detailed student profile and comments
+     */
+    private void openStudentDetail(StudentProfile student) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cs151/application/student_detail.fxml"));
+            Parent root = loader.load();
+
+            StudentDetailController controller = loader.getController();
+            controller.setStudent(student);
+
+            Stage detailStage = new Stage();
+            detailStage.setTitle("Student Details - " + student.getFullName());
+            detailStage.initModality(Modality.APPLICATION_MODAL);
+            detailStage.setScene(new Scene(root));
+            detailStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Cannot open student details: " + e.getMessage()).show();
+        }
     }
 
     @FXML
