@@ -49,13 +49,17 @@ public class ReportsController {
         blacklistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
 
         // Handle double-click on table row
-        reportsTable.setOnMouseClicked(event -> {
-            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-                StudentProfile selected = reportsTable.getSelectionModel().getSelectedItem();
-                if (selected != null) {
+        reportsTable.setRowFactory(tableView -> {
+            TableRow<StudentProfile> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY
+                        && event.getClickCount() == 2
+                        && !row.isEmpty()) {
+                    StudentProfile selected = row.getItem();
                     openStudentDetail(selected);
                 }
-            }
+            });
+            return row;
         });
     }
 
