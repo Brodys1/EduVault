@@ -182,6 +182,8 @@ public class SearchController {
 
             // REUSE current scene
             Scene scene = resultsTable.getScene();
+            Stage stage = (Stage) scene.getWindow();
+            stage.setTitle("EduVault — Team 31");
             scene.setRoot(homeRoot);
 
         } catch (IOException e) {

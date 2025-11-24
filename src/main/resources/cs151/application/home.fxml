@@ -35,5 +35,8 @@
                         prefWidth="195" maxWidth="245"/>
             </children>
         </HBox>
+        <Button text="View Reports"
+                onAction="#handleReports"
+                prefWidth="300" maxWidth="400"/>
     </children>
 </VBox>

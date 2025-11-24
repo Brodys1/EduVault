@@ -2,6 +2,25 @@
 
 ## Who did what:
 
+### Version 0.9
+Brody Smith:
+- Implemented double click functionality on reports page to view students information
+- Created a read-only form layout to display students information
+- Bug Fix: Made title bar consistent when going back and forth between views
+
+Chloe Pham:
+- Added double click functionality on student detail page to view full comment content
+- Implemented CommentDetailController.java & comment_detail.fxml 
+
+Xuan Phuong Nguyen
+- Added comment table-view to bottom of student detail page
+
+Tavishi Bansal
+- Implemented Reports page (reports.fxml, ReportsController.java) to display whitelisted and blacklisted students in tabular format.
+- Added “View Reports” button on Home page and integrated navigation to reports page.
+- Enabled filtering via checkboxes to toggle between Whitelisted, Blacklisted, or both student lists.
+- Connected report data dynamically to StudentRepository for real-time updates.
+
 ### Version 0.8
 Brody Smith:
 - Added button to view comments in SearchController and StudentProfilesController

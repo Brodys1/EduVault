@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cs151.ui.ReportsController"
+            prefWidth="800" prefHeight="600">
+
+    <top>
+        <VBox spacing="10" alignment="CENTER">
+            <padding><Insets top="15" bottom="10"/></padding>
+            <Label text="Reports: Whitelisted &amp; Blacklisted Students"
+                   style="-fx-font-size:18px;-fx-font-weight:bold;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="15">
+            <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+            <HBox spacing="20" alignment="CENTER">
+                <CheckBox fx:id="whitelistCheck" text="Whitelisted Students"/>
+                <CheckBox fx:id="blacklistCheck" text="Blacklisted Students"/>
+                <Button text="Refresh" onAction="#handleRefresh"/>
+            </HBox>
+
+            <TableView fx:id="reportsTable" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="colName" text="Full Name" prefWidth="180"/>
+                    <TableColumn fx:id="colStatus" text="Academic Status" prefWidth="120"/>
+                    <TableColumn fx:id="colLanguages" text="Languages" prefWidth="200"/>
+                    <TableColumn fx:id="colDatabases" text="Databases" prefWidth="200"/>
+                    <TableColumn fx:id="colRole" text="Preferred Role" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT">
+            <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
+            <Button text="Back to Home" onAction="#handleBack"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cs151.ui.StudentDetailController">
+
+    <children>
+
+        <VBox spacing="20" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+              AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- TITLE -->
+            <Label text="Student Details"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <!-- BASIC INFO -->
+            <VBox spacing="10">
+                <Label text="Basic Information"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="20"/>
+                        <ColumnConstraints percentWidth="80"/>
+                    </columnConstraints>
+
+                    <Label text="Full Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <Label fx:id="fullNameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Academic Status:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <Label fx:id="academicStatusField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Employment Status:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <Label fx:id="employmentStatusField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Job Details:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <Label fx:id="jobDetailsField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- SKILLS -->
+            <VBox spacing="10">
+                <Label text="Skills and Interests"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="20"/>
+                        <ColumnConstraints percentWidth="80"/>
+                    </columnConstraints>
+
+                    <Label text="Programming Languages:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <Label fx:id="programmingLanguagesField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Databases Known:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <Label fx:id="databasesField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Preferred Role:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <Label fx:id="preferredRoleField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- FLAGS -->
+            <VBox spacing="10">
+                <Label text="Future Services Flags"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="20"/>
+                        <ColumnConstraints percentWidth="80"/>
+                    </columnConstraints>
+
+                    <Label text="Flag Status:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <Label fx:id="flagsField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- COMMENTS TABLE -->
+            <VBox spacing="10">
+                <Label text="Comments"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <TableView fx:id="commentsTable" prefHeight="220">
+                    <columns>
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="120"/>
+                        <TableColumn fx:id="colComment" text="Comment" prefWidth="700"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <Separator/>
+
+            <!-- CLOSE BUTTON -->
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Close" onAction="#handleClose"
+                        style="-fx-font-size: 14px; -fx-pref-width: 100;"/>
+            </HBox>
+        </VBox>
+
+    </children>
+</AnchorPane>
