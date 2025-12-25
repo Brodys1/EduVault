@@ -126,7 +126,7 @@ public class ReportsController {
             Parent root = loader.load();
             Scene scene = ((Button) event.getSource()).getScene();
             Stage stage = (Stage) scene.getWindow();
-            stage.setTitle("EduVault — Team 31");
+            stage.setTitle("EduVault");
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
