@@ -16,9 +16,9 @@ Xuan Phuong Nguyen
 - Added comment table-view to bottom of student detail page
 
 Tavishi Bansal
-- Implemented Reports page (reports.fxml, ReportsController.java) to display whitelisted and blacklisted students in tabular format.
+- Implemented Reports page (reports.fxml, ReportsController.java) to display allowlisted and denylisted students in tabular format.
 - Added “View Reports” button on Home page and integrated navigation to reports page.
-- Enabled filtering via checkboxes to toggle between Whitelisted, Blacklisted, or both student lists.
+- Enabled filtering via checkboxes to toggle between Allowlisted, Denylisted, or both student lists.
 - Connected report data dynamically to StudentRepository for real-time updates.
 
 ### Version 0.8

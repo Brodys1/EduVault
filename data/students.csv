@@ -1,7 +1,7 @@
 FullName,AcademicStatus,Employment,JobDetails,Languages,Databases,PreferredRole,Flags
-"John Smith","Sophomore","Employed","Adobe","Java, Python","Postgres","Full-Stack","Whitelist"
-"Karen Mucus","Freshman","Not employed","","Python, C++","MongoDB, Oracle","Front-End","Blacklist"
-"Leslie Knope","Senior","Employed","Politician","Python","Oracle","Data","Blacklist"
-"Scott Green","Sophomore","Not employed","","Java, Python, C++","Postgres, MongoDB","Back-End","Whitelist"
-"Shelly Sells","Senior","Employed","Sea Shell Seller","Python","SQLite","Data","Blacklist"
-"Terry Fyka","Junior","Employed","Statistician","Java, C++","Oracle","Data","Whitelist"
+"John Smith","Sophomore","Employed","Adobe","Java, Python","Postgres","Full-Stack","Allowlist"
+"Karen Mucus","Freshman","Not employed","","Python, C++","MongoDB, Oracle","Front-End","Denylist"
+"Leslie Knope","Senior","Employed","Politician","Python","Oracle","Data","Denylist"
+"Scott Green","Sophomore","Not employed","","Java, Python, C++","Postgres, MongoDB","Back-End","Allowlist"
+"Shelly Sells","Senior","Employed","Sea Shell Seller","Python","SQLite","Data","Denylist"
+"Terry Fyka","Junior","Employed","Statistician","Java, C++","Oracle","Data","Allowlist"

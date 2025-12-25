@@ -53,9 +53,9 @@ public class StudentController implements Initializable {
     @FXML
     protected TextArea commentsArea;
     @FXML
-    protected CheckBox whitelistCheck;
+    protected CheckBox allowlistCheck;
     @FXML
-    protected CheckBox blacklistCheck;
+    protected CheckBox denylistCheck;
     @FXML
     protected Label flagsError;
     @FXML
@@ -113,15 +113,15 @@ public class StudentController implements Initializable {
             }
         });
 
-        whitelistCheck.selectedProperty().addListener((_, _, isNowSelected) -> {
-            if (isNowSelected && blacklistCheck.isSelected()) {
-                blacklistCheck.setSelected(false);
+        allowlistCheck.selectedProperty().addListener((_, _, isNowSelected) -> {
+            if (isNowSelected && denylistCheck.isSelected()) {
+                denylistCheck.setSelected(false);
             }
         });
 
-        blacklistCheck.selectedProperty().addListener((_, _, isNowSelected) -> {
-            if (isNowSelected && whitelistCheck.isSelected()) {
-                whitelistCheck.setSelected(false);
+        denylistCheck.selectedProperty().addListener((_, _, isNowSelected) -> {
+            if (isNowSelected && allowlistCheck.isSelected()) {
+                allowlistCheck.setSelected(false);
             }
         });
 
@@ -179,11 +179,11 @@ public class StudentController implements Initializable {
 
     // @FXML
     // private void addComment() {
-    //     String comment = commentsArea.getText().trim();
-    //     if (!comment.isEmpty())
-    //         // TODO Change this to make multiple entries instead
-    //         commentsArea.setText(comment + "\n\n");
-    //     commentsArea.positionCaret(commentsArea.getText().length());
+    // String comment = commentsArea.getText().trim();
+    // if (!comment.isEmpty())
+    // // TODO Change this to make multiple entries instead
+    // commentsArea.setText(comment + "\n\n");
+    // commentsArea.positionCaret(commentsArea.getText().length());
 
     // }
 
@@ -203,8 +203,8 @@ public class StudentController implements Initializable {
         String databases = String.join(", ", selectedDatabases);
         String preferredRole = preferredRoleCombo.getSelectionModel().getSelectedItem();
         String comments = commentsArea.getText().trim();
-        String flags = whitelistCheck.isSelected() ? "Whitelist"
-                : blacklistCheck.isSelected() ? "Blacklist"
+        String flags = allowlistCheck.isSelected() ? "Allowlist"
+                : denylistCheck.isSelected() ? "Denylist"
                         : "";
 
         boolean success = cs151.application.StudentRepository.add(
@@ -232,8 +232,8 @@ public class StudentController implements Initializable {
         selectedDatabases.clear();
         preferredRoleCombo.getSelectionModel().clearSelection();
         commentsArea.clear();
-        whitelistCheck.setSelected(false);
-        blacklistCheck.setSelected(false);
+        allowlistCheck.setSelected(false);
+        denylistCheck.setSelected(false);
         clearErrorLabels();
         statusLabel.setText("");
     }

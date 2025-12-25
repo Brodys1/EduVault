@@ -12,40 +12,49 @@ import java.util.Map;
 
 public class EditStudentController {
 
-    @FXML private TextField fullNameField;
-    @FXML private ComboBox<String> academicStatusCombo;
+    @FXML
+    private TextField fullNameField;
+    @FXML
+    private ComboBox<String> academicStatusCombo;
 
-    @FXML private RadioButton employedRadio;
-    @FXML private RadioButton notEmployedRadio;
-    @FXML private TextField jobDetailsField;
+    @FXML
+    private RadioButton employedRadio;
+    @FXML
+    private RadioButton notEmployedRadio;
+    @FXML
+    private TextField jobDetailsField;
 
     // we will build these lists as “checkbox lists” in code
-    @FXML private ListView<CheckBox> languagesList;
-    @FXML private ListView<CheckBox> databasesList;
+    @FXML
+    private ListView<CheckBox> languagesList;
+    @FXML
+    private ListView<CheckBox> databasesList;
 
-    @FXML private ComboBox<String> preferredRoleCombo;
-    @FXML private TextArea commentsArea;
-    @FXML private CheckBox whitelistCheck;
-    @FXML private CheckBox blacklistCheck;
+    @FXML
+    private ComboBox<String> preferredRoleCombo;
+    @FXML
+    private TextArea commentsArea;
+    @FXML
+    private CheckBox allowlistCheck;
+    @FXML
+    private CheckBox denylistCheck;
 
     // to know if we are editing or creating
     private StudentProfile originalStudent;
 
     // keep references to checkboxes so we can mark them
     private final Map<String, CheckBox> langCheckMap = new LinkedHashMap<>();
-    private final Map<String, CheckBox> dbCheckMap   = new LinkedHashMap<>();
+    private final Map<String, CheckBox> dbCheckMap = new LinkedHashMap<>();
 
     @FXML
     public void initialize() {
         // 1. academic status choices
         academicStatusCombo.getItems().setAll(
-                "Freshman", "Sophomore", "Junior", "Senior", "Graduate"
-        );
+                "Freshman", "Sophomore", "Junior", "Senior", "Graduate");
 
         // 2. preferred role choices
         preferredRoleCombo.getItems().setAll(
-                "Full-Stack", "Front-End", "Back-End", "Data", "Other"
-        );
+                "Full-Stack", "Front-End", "Back-End", "Data", "Other");
 
         // 3. make language checkbox list
         buildLanguageList();
@@ -61,7 +70,7 @@ public class EditStudentController {
 
     private void buildLanguageList() {
         // order matters → LinkedHashMap
-        String[] langs = {"Java", "Python", "C++"};
+        String[] langs = { "Java", "Python", "C++" };
         for (String l : langs) {
             CheckBox cb = new CheckBox(l);
             langCheckMap.put(l.toLowerCase(), cb);
@@ -70,7 +79,7 @@ public class EditStudentController {
     }
 
     private void buildDatabaseList() {
-        String[] dbs = {"MySQL", "Postgres", "MongoDB", "Oracle", "SQLite"};
+        String[] dbs = { "MySQL", "Postgres", "MongoDB", "Oracle", "SQLite" };
         for (String d : dbs) {
             CheckBox cb = new CheckBox(d);
             dbCheckMap.put(d.toLowerCase(), cb);
@@ -98,12 +107,12 @@ public class EditStudentController {
         jobDetailsField.setText(student.getJobDetails());
 
         // comments
-        //commentsArea.setText(student.getComments());
+        // commentsArea.setText(student.getComments());
 
         // flags
         String flags = student.getFlags() == null ? "" : student.getFlags().toLowerCase();
-        whitelistCheck.setSelected(flags.contains("whitelist"));
-        blacklistCheck.setSelected(flags.contains("blacklist"));
+        allowlistCheck.setSelected(flags.contains("allowlist"));
+        denylistCheck.setSelected(flags.contains("denylist"));
 
         // preferred role
         if (student.getPreferredRole() != null && !student.getPreferredRole().isBlank()) {
@@ -116,7 +125,8 @@ public class EditStudentController {
             for (String part : langsStr.split(",")) {
                 String key = part.trim().toLowerCase();
                 CheckBox cb = langCheckMap.get(key);
-                if (cb != null) cb.setSelected(true);
+                if (cb != null)
+                    cb.setSelected(true);
             }
         }
 
@@ -126,7 +136,8 @@ public class EditStudentController {
             for (String part : dbsStr.split(",")) {
                 String key = part.trim().toLowerCase();
                 CheckBox cb = dbCheckMap.get(key);
-                if (cb != null) cb.setSelected(true);
+                if (cb != null)
+                    cb.setSelected(true);
             }
         }
     }
@@ -135,7 +146,7 @@ public class EditStudentController {
     private void handleSave() {
         // collect checkboxes → string
         String langs = collectChecked(langCheckMap);
-        String dbs   = collectChecked(dbCheckMap);
+        String dbs = collectChecked(dbCheckMap);
 
         String empStatus = employedRadio.isSelected() ? "Employed" : "Not employed";
 
@@ -147,9 +158,8 @@ public class EditStudentController {
                 langs,
                 dbs,
                 preferredRoleCombo.getValue() == null ? "" : preferredRoleCombo.getValue(),
-                //commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
-                buildFlags()
-        );
+                // commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
+                buildFlags());
 
         if (originalStudent == null) {
             // create
@@ -174,8 +184,10 @@ public class EditStudentController {
 
     private String buildFlags() {
         List<String> f = new ArrayList<>();
-        if (whitelistCheck.isSelected()) f.add("Whitelist");
-        if (blacklistCheck.isSelected()) f.add("Blacklist");
+        if (allowlistCheck.isSelected())
+            f.add("Allowlist");
+        if (denylistCheck.isSelected())
+            f.add("Denylist");
         return String.join(", ", f);
     }
 
@@ -189,5 +201,3 @@ public class EditStudentController {
         st.close();
     }
 }
-
-
