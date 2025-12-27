@@ -24,7 +24,6 @@ public class EditStudentController {
     @FXML
     private TextField jobDetailsField;
 
-    // we will build these lists as “checkbox lists” in code
     @FXML
     private ListView<CheckBox> languagesList;
     @FXML
@@ -39,7 +38,6 @@ public class EditStudentController {
     @FXML
     private CheckBox denylistCheck;
 
-    // to know if we are editing or creating
     private StudentProfile originalStudent;
 
     // keep references to checkboxes so we can mark them
@@ -106,9 +104,6 @@ public class EditStudentController {
         }
         jobDetailsField.setText(student.getJobDetails());
 
-        // comments
-        // commentsArea.setText(student.getComments());
-
         // flags
         String flags = student.getFlags() == null ? "" : student.getFlags().toLowerCase();
         allowlistCheck.setSelected(flags.contains("allowlist"));
@@ -158,7 +153,6 @@ public class EditStudentController {
                 langs,
                 dbs,
                 preferredRoleCombo.getValue() == null ? "" : preferredRoleCombo.getValue(),
-                // commentsArea.getText() == null ? "" : commentsArea.getText().trim(),
                 buildFlags());
 
         if (originalStudent == null) {

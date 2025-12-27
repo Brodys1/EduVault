@@ -67,7 +67,6 @@ public class StudentController implements Initializable {
     protected ObservableList<String> selectedLanguages;
     protected ObservableList<String> selectedDatabases;
 
-    // Hard-coded options
     private static final List<String> ACADEMIC_STATUSES = Arrays.asList(
             "Freshman", "Sophomore", "Junior", "Senior", "Graduate");
 
@@ -176,16 +175,6 @@ public class StudentController implements Initializable {
                     }
                 }));
     }
-
-    // @FXML
-    // private void addComment() {
-    // String comment = commentsArea.getText().trim();
-    // if (!comment.isEmpty())
-    // // TODO Change this to make multiple entries instead
-    // commentsArea.setText(comment + "\n\n");
-    // commentsArea.positionCaret(commentsArea.getText().length());
-
-    // }
 
     @FXML
     private void saveStudentProfile() {

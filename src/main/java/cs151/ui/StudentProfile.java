@@ -8,7 +8,6 @@ public class StudentProfile {
     private String languages;
     private String databases;
     private String preferredRole;
-    private String comments;
     private String flags; // “Allowlist”, “Denylist”, or “None”
 
     public StudentProfile(
@@ -19,7 +18,6 @@ public class StudentProfile {
             String languages,
             String databases,
             String preferredRole,
-            // String comments,
             String flags) {
         this.fullName = fullName;
         this.academicStatus = academicStatus;
@@ -28,7 +26,6 @@ public class StudentProfile {
         this.languages = languages;
         this.databases = databases;
         this.preferredRole = preferredRole;
-        // this.comments = comments;
         this.flags = flags;
     }
 
@@ -61,7 +58,6 @@ public class StudentProfile {
         return preferredRole;
     }
 
-    // public String getComments() { return comments; }
     public String getFlags() {
         return flags;
     }

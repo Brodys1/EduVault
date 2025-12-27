@@ -62,7 +62,7 @@ public class StudentRepository {
         if (idx >= 0) {
             students.set(idx, edited);
         } else {
-            // fallback – if for some reason we didn't find it, just add it
+            // fallback – if for some reason it wasn't found, just add it
             students.add(edited);
         }
 
