@@ -22,25 +22,27 @@ EduVault is a comprehensive student management system designed to help faculty e
 
 Team project for CS 151 at SJSU with contributions from:
 
-- [Brody Smith](https://brodysmith.com) | **Technical Lead & Repository Manager**
-- Chloe Pham | **Team Lead**
+- [Brody Smith](https://brodysmith.com) | **Technical Lead**
+- Chloe Pham | **Product Lead**
 - Xuan Phuong Nguyen
 - Tavishi Bansal
+
+*Note that our versions do not match [semantic versioning](https://semver.org/), because of standards set by our professor.*
 
 ### Version 1.0
 
 Brody Smith:
 
-- Enhanced documentation with application screenshots
-- Refactored codebase to follow industry-standard naming conventions and improve code maintainability
+- Updated documentation to reflect latest version of product
+- Refactored codebase to follow industry-standard naming conventions (ex: "allowlist" instead of "whitelist") and improve code maintainability
 
 ### Version 0.9
 
 Brody Smith:
 
 - Implemented double-click event handling on reports page to enable direct navigation to student detail views
-- Designed and developed read-only form layout for displaying comprehensive student information
-- Resolved UI consistency issue by standardizing title bar behavior across all view transitions
+- Designed and developed read-only form layout for displaying comprehensive student information in a secure way
+- Fixed UX issue by standardizing title bar behavior across all view transitions
 
 Chloe Pham:
 
@@ -147,19 +149,11 @@ Tavishi Bansal
 
 Brody Smith:
 
-- Designed and implemented CSV-based persistent storage system for programming languages data
+- Designed and implemented CSV-based persistent storage backend for programming languages data
 
 Chloe Pham:
 
 - Developed LangTable.java for programming language data structure management
-
-Xuan Phuong Nguyen
-
-- N/A
-
-Tavishi Bansal
-
-- N/A
 
 ### Version 0.2
 
