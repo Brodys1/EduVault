@@ -8,8 +8,7 @@ public class StudentProfile {
     private String languages;
     private String databases;
     private String preferredRole;
-    private String comments;
-    private String flags; // “Whitelist”, “Blacklist”, or “None”
+    private String flags; // “Allowlist”, “Denylist”, or “None”
 
     public StudentProfile(
             String fullName,
@@ -19,9 +18,7 @@ public class StudentProfile {
             String languages,
             String databases,
             String preferredRole,
-            //String comments,
-            String flags
-    ) {
+            String flags) {
         this.fullName = fullName;
         this.academicStatus = academicStatus;
         this.employmentStatus = employmentStatus;
@@ -29,18 +26,39 @@ public class StudentProfile {
         this.languages = languages;
         this.databases = databases;
         this.preferredRole = preferredRole;
-        //this.comments = comments;
         this.flags = flags;
     }
 
     // Getters
-    public String getFullName() { return fullName; }
-    public String getAcademicStatus() { return academicStatus; }
-    public String getEmploymentStatus() { return employmentStatus; }
-    public String getJobDetails() { return jobDetails; }
-    public String getLanguages() { return languages; }
-    public String getDatabases() { return databases; }
-    public String getPreferredRole() { return preferredRole; }
-    //public String getComments() { return comments; }
-    public String getFlags() { return flags; }
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getAcademicStatus() {
+        return academicStatus;
+    }
+
+    public String getEmploymentStatus() {
+        return employmentStatus;
+    }
+
+    public String getJobDetails() {
+        return jobDetails;
+    }
+
+    public String getLanguages() {
+        return languages;
+    }
+
+    public String getDatabases() {
+        return databases;
+    }
+
+    public String getPreferredRole() {
+        return preferredRole;
+    }
+
+    public String getFlags() {
+        return flags;
+    }
 }

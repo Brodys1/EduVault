@@ -16,15 +16,23 @@ import java.io.IOException;
 
 public class ReportsController {
 
-    @FXML private CheckBox whitelistCheck;
-    @FXML private CheckBox blacklistCheck;
-    @FXML private TableView<StudentProfile> reportsTable;
+    @FXML
+    private CheckBox allowlistCheck;
+    @FXML
+    private CheckBox denylistCheck;
+    @FXML
+    private TableView<StudentProfile> reportsTable;
 
-    @FXML private TableColumn<StudentProfile, String> colName;
-    @FXML private TableColumn<StudentProfile, String> colStatus;
-    @FXML private TableColumn<StudentProfile, String> colLanguages;
-    @FXML private TableColumn<StudentProfile, String> colDatabases;
-    @FXML private TableColumn<StudentProfile, String> colRole;
+    @FXML
+    private TableColumn<StudentProfile, String> colName;
+    @FXML
+    private TableColumn<StudentProfile, String> colStatus;
+    @FXML
+    private TableColumn<StudentProfile, String> colLanguages;
+    @FXML
+    private TableColumn<StudentProfile, String> colDatabases;
+    @FXML
+    private TableColumn<StudentProfile, String> colRole;
 
     private final ObservableList<StudentProfile> displayedStudents = FXCollections.observableArrayList();
 
@@ -32,21 +40,25 @@ public class ReportsController {
     private void initialize() {
         // Bind columns
         colName.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getFullName()));
-        colStatus.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getAcademicStatus()));
-        colLanguages.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLanguages()));
-        colDatabases.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDatabases()));
-        colRole.setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getPreferredRole()));
+        colStatus.setCellValueFactory(
+                c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getAcademicStatus()));
+        colLanguages
+                .setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getLanguages()));
+        colDatabases
+                .setCellValueFactory(c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getDatabases()));
+        colRole.setCellValueFactory(
+                c -> new javafx.beans.property.SimpleStringProperty(c.getValue().getPreferredRole()));
 
         reportsTable.setItems(displayedStudents);
 
         // Default: show all (both selected)
-        whitelistCheck.setSelected(true);
-        blacklistCheck.setSelected(true);
+        allowlistCheck.setSelected(true);
+        denylistCheck.setSelected(true);
         updateTable();
 
         // Auto-update when toggles change
-        whitelistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
-        blacklistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
+        allowlistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
+        denylistCheck.selectedProperty().addListener((obs, o, n) -> updateTable());
 
         // Handle double-click on table row
         reportsTable.setRowFactory(tableView -> {
@@ -72,12 +84,12 @@ public class ReportsController {
         var all = StudentRepository.getAll();
         ObservableList<StudentProfile> filtered = FXCollections.observableArrayList();
 
-        if (whitelistCheck.isSelected() && blacklistCheck.isSelected()) {
+        if (allowlistCheck.isSelected() && denylistCheck.isSelected()) {
             filtered.setAll(all); // show all
-        } else if (whitelistCheck.isSelected()) {
-            filtered.setAll(all.filtered(s -> "Whitelist".equalsIgnoreCase(s.getFlags())));
-        } else if (blacklistCheck.isSelected()) {
-            filtered.setAll(all.filtered(s -> "Blacklist".equalsIgnoreCase(s.getFlags())));
+        } else if (allowlistCheck.isSelected()) {
+            filtered.setAll(all.filtered(s -> "Allowlist".equalsIgnoreCase(s.getFlags())));
+        } else if (denylistCheck.isSelected()) {
+            filtered.setAll(all.filtered(s -> "Denylist".equalsIgnoreCase(s.getFlags())));
         } else {
             filtered.clear(); // none selected
         }
@@ -114,7 +126,7 @@ public class ReportsController {
             Parent root = loader.load();
             Scene scene = ((Button) event.getSource()).getScene();
             Stage stage = (Stage) scene.getWindow();
-            stage.setTitle("EduVault — Team 31");
+            stage.setTitle("EduVault");
             scene.setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();

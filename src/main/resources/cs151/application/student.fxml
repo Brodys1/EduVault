@@ -109,10 +109,10 @@
                     <VBox spacing="10">
                         <Label text="2.4 Future Services Flags" style="-fx-font-size:18px; -fx-font-weight:bold;"/>
                         
-                        <!-- Whitelist and Blacklist -->
+                        <!-- Allowlist and Denylist -->
                         <HBox spacing="20">
-                            <CheckBox fx:id="whitelistCheck" text="Whitelist (eligible for additional support)"/>
-                            <CheckBox fx:id="blacklistCheck" text="Blacklist (no future services)"/>
+                            <CheckBox fx:id="allowlistCheck" text="Allowlist (eligible for additional support)"/>
+                            <CheckBox fx:id="denylistCheck" text="Denylist (no future services)"/>
                         </HBox>
                         <Label fx:id="flagsError" text="" style="-fx-text-fill: red;"/>
                     </VBox>

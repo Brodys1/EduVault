@@ -85,12 +85,10 @@ public class LangTable extends Application {
             String line;
             boolean header = true;  // Use this to skip the header (the first line)
 
-            // Read one line at a time until we reach the end of the file
             while ((line = reader.readLine()) != null) {
 
                 // If this is the header line, skip it
                 if (header) {
-                    System.out.println("Skipped first line: " + line);
                     header = false;
                     continue;
                 }

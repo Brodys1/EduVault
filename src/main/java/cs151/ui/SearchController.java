@@ -73,7 +73,6 @@ public class SearchController {
         if (colPreferredRole != null) {
             colPreferredRole.setCellValueFactory(new PropertyValueFactory<>("preferredRole"));
         }
-        // these two are on your “old” page
         if (colComments != null) {
             setupCommentsColumn();
         }
@@ -81,19 +80,15 @@ public class SearchController {
             colFlags.setCellValueFactory(new PropertyValueFactory<>("flags"));
         }
 
-        // 2) add the Edit button column (your friend’s part)
         if (colActions != null) {
             setupActionsColumn();
         }
 
-        // 3) load ALL when page opens
         results.setAll(StudentRepository.getAll());
         resultsTable.setItems(results);
 
-        // 4) allow multi-select for “Delete Selected”
         resultsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // 5) wire top controls to methods (in case FXML didn’t)
         if (searchField != null) {
             searchField.setOnAction(e -> handleSearch(null));
         }
@@ -167,7 +162,6 @@ public class SearchController {
             StudentRepository.remove(s);
         }
 
-        // refresh
         handleSearch(null);
     }
 
@@ -183,7 +177,7 @@ public class SearchController {
             // REUSE current scene
             Scene scene = resultsTable.getScene();
             Stage stage = (Stage) scene.getWindow();
-            stage.setTitle("EduVault — Team 31");
+            stage.setTitle("EduVault");
             scene.setRoot(homeRoot);
 
         } catch (IOException e) {
@@ -220,8 +214,7 @@ public class SearchController {
     }
 
     /**
-     * Opens your edit_student.fxml and calls controller.loadStudent(...)
-     * → this is exactly your friend’s requirement
+     * Opens edit_student.fxml and calls controller.loadStudent(...)
      */
     private void openEditPage(StudentProfile student) {
         try {

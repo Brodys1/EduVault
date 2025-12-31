@@ -24,10 +24,8 @@ public class StudentCommentsController {
 
     @FXML private Button closeButton;
 
-    // Backing list for just this student's comments (strings)
     private final ObservableList<String> studentComments = FXCollections.observableArrayList();
 
-    // Name of the student this page is showing
     private String studentName;
 
     /**
@@ -84,7 +82,6 @@ public class StudentCommentsController {
         // Create new comment and save permanently
         Comment newComment = new Comment(studentName, text.trim(), today);
 
-        // CommentRepository.add(...) is void, so just call it
         CommentRepository.add(newComment);
 
         // Show comment with its date in the list
@@ -100,7 +97,6 @@ public class StudentCommentsController {
         stage.close();
     }
 
-    // Small helpers
     private void showInfo(String msg) {
         Alert a = new Alert(Alert.AlertType.INFORMATION, msg, ButtonType.OK);
         a.setHeaderText(null);

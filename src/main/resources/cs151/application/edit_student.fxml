@@ -78,8 +78,8 @@
                 <HBox spacing="14">
                     <children>
                         <Label text="Flags:"/>
-                        <CheckBox fx:id="whitelistCheck" text="Whitelist"/>
-                        <CheckBox fx:id="blacklistCheck" text="Blacklist"/>
+                        <CheckBox fx:id="allowlistCheck" text="Allowlist"/>
+                        <CheckBox fx:id="denylistCheck" text="Denylist"/>
                     </children>
                 </HBox>
 

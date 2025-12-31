@@ -114,7 +114,7 @@ public class ProgrammingLanguagesController {
     public void handleBack(ActionEvent event) throws Exception {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));
-        stage.setTitle("EduVault — Team 31");
+        stage.setTitle("EduVault");
         stage.setScene(scene);
     }
 }

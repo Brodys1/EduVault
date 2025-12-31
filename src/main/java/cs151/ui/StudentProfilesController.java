@@ -19,16 +19,26 @@ import java.util.ResourceBundle;
 
 public class StudentProfilesController implements Initializable {
 
-    @FXML private TableView<StudentProfile> studentsTable;
-    @FXML private TableColumn<StudentProfile, String> nameCol;
-    @FXML private TableColumn<StudentProfile, String> statusCol;
-    @FXML private TableColumn<StudentProfile, String> employmentCol;
-    @FXML private TableColumn<StudentProfile, String> jobDetailsCol;
-    @FXML private TableColumn<StudentProfile, String> langCol;
-    @FXML private TableColumn<StudentProfile, String> dbCol;
-    @FXML private TableColumn<StudentProfile, String> roleCol;
-    @FXML private TableColumn<StudentProfile, String> commentsCol;
-    @FXML private TableColumn<StudentProfile, String> flagsCol;
+    @FXML
+    private TableView<StudentProfile> studentsTable;
+    @FXML
+    private TableColumn<StudentProfile, String> nameCol;
+    @FXML
+    private TableColumn<StudentProfile, String> statusCol;
+    @FXML
+    private TableColumn<StudentProfile, String> employmentCol;
+    @FXML
+    private TableColumn<StudentProfile, String> jobDetailsCol;
+    @FXML
+    private TableColumn<StudentProfile, String> langCol;
+    @FXML
+    private TableColumn<StudentProfile, String> dbCol;
+    @FXML
+    private TableColumn<StudentProfile, String> roleCol;
+    @FXML
+    private TableColumn<StudentProfile, String> commentsCol;
+    @FXML
+    private TableColumn<StudentProfile, String> flagsCol;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,11 +49,11 @@ public class StudentProfilesController implements Initializable {
         langCol.setCellValueFactory(new PropertyValueFactory<>("languages"));
         dbCol.setCellValueFactory(new PropertyValueFactory<>("databases"));
         roleCol.setCellValueFactory(new PropertyValueFactory<>("preferredRole"));
-        
+
         if (commentsCol != null) {
             setupCommentsColumn();
         }
-        
+
         flagsCol.setCellValueFactory(new PropertyValueFactory<>("flags"));
 
         // Load saved data from repository
@@ -56,7 +66,7 @@ public class StudentProfilesController implements Initializable {
     private void handleBack(ActionEvent event) throws Exception {
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/cs151/application/home.fxml")));
-        stage.setTitle("EduVault — Team 31");
+        stage.setTitle("EduVault");
         stage.setScene(scene);
     }
 
